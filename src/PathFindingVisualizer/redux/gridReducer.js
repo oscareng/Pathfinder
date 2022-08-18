@@ -30,6 +30,8 @@ function createGridHelper() {
         isWall: false,
         isVisited: false,
         distance: Infinity,
+        distanceFromStart: Infinity,
+        estimatedDistanceToEnd: Infinity,
       };
       currentRow.push(currentNode);
     }

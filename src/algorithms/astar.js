@@ -1,21 +1,18 @@
-class Node {
-  constructor(row, col, value) {
-    this.id = row.toString() + "-" + col.toString();
-    this.row = row;
-    this.col = col;
-    this.value = value;
-    this.distanceFromStart = Infinity;
-    this.estimatedDistanceToEnd = Infinity;
-    this.previousNode = null;
-  }
-}
+// class Node {
+//   constructor(row, col, value) {
+//     this.id = row.toString() + "-" + col.toString();
+//     this.row = row;
+//     this.col = col;
+//     this.value = value;
+//     this.distanceFromStart = Infinity;
+//     this.estimatedDistanceToEnd = Infinity;
+//     this.previousNode = null;
+//   }
+// }
 
-function aStarAlgorithm(startRow, startCol, endRow, endCol, graph) {
-  const nodes = initializeNodes(graph);
-
-  const startNode = nodes[startRow][startCol];
-  const endNode = nodes[endRow][endCol];
-
+export function aStar(nodes, startNode, endNode) {
+  const nodesVisited = [];
+  console.log(nodes);
   startNode.distanceFromStart = 0;
   startNode.estimatedDistanceToEnd = calculateManhattanDistance(
     startNode,
@@ -26,12 +23,12 @@ function aStarAlgorithm(startRow, startCol, endRow, endCol, graph) {
 
   while (!nodesToVisit.isEmpty()) {
     const currentMinDistanceNode = nodesToVisit.remove();
-
+    nodesVisited.push(currentMinDistanceNode);
     if (currentMinDistanceNode === endNode) break;
 
     const neighbors = getNeighboringNodes(currentMinDistanceNode, nodes);
     for (const neighbor of neighbors) {
-      if (neighbor.value == 1) continue;
+      if (neighbor.isWall) continue;
 
       const tentativeDistanceToNeighbor =
         currentMinDistanceNode.distanceFromStart + 1;
@@ -51,21 +48,22 @@ function aStarAlgorithm(startRow, startCol, endRow, endCol, graph) {
       }
     }
   }
-  return reconstructPath(endNode);
+  const path = getNodesInShortestPathOrder(endNode);
+  return { path, nodesVisited };
 }
 
-function initializeNodes(graph) {
-  const nodes = [];
+// function initializeNodes(graph) {
+//   const nodes = [];
 
-  for (const [i, row] of graph.entries()) {
-    nodes.push([]);
-    for (const [j, value] of row.entries()) {
-      const node = new Node(i, j, value);
-      nodes[i].push(node);
-    }
-  }
-  return nodes;
-}
+//   for (const [i, row] of graph.entries()) {
+//     nodes.push([]);
+//     for (const [j, value] of row.entries()) {
+//       const node = new Node(i, j, value);
+//       nodes[i].push(node);
+//     }
+//   }
+//   return nodes;
+// }
 
 function calculateManhattanDistance(currentNode, endNode) {
   const currentRow = currentNode.row;
@@ -101,22 +99,14 @@ function getNeighboringNodes(node, nodes) {
   return neighbors;
 }
 
-function reconstructPath(endNode) {
-  if (endNode.previousNode == null) {
-    return [];
-  }
-
-  let currentNode = endNode;
-  let path = [];
-
-  while (currentNode != null) {
-    path.push([currentNode.row, currentNode.col]);
+export function getNodesInShortestPathOrder(finishNode) {
+  const nodesInShortestPathOrder = [];
+  let currentNode = finishNode;
+  while (currentNode !== undefined) {
+    nodesInShortestPathOrder.unshift(currentNode);
     currentNode = currentNode.previousNode;
   }
-
-  path.reverse();
-
-  return path;
+  return nodesInShortestPathOrder;
 }
 
 class MinHeap {
