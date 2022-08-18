@@ -3,11 +3,12 @@
 // previous node, effectively allowing us to compute the shortest path
 // by backtracking from the finish node.
 export function dijkstra(grid, startNode, finishNode) {
-  console.log(startNode, finishNode);
   const visitedNodesInOrder = [];
   startNode.distance = 0;
   const unvisitedNodes = getAllNodes(grid);
+
   while (!!unvisitedNodes.length) {
+    console.log(visitedNodesInOrder);
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     // If we encounter a wall, we skip it.
@@ -51,6 +52,7 @@ function getAllNodes(grid) {
       nodes.push(node);
     }
   }
+
   return nodes;
 }
 
@@ -65,3 +67,7 @@ export function getNodesInShortestPathOrder(finishNode) {
   }
   return nodesInShortestPathOrder;
 }
+
+//first we take the starting node and set the distance to zero. then we grab the grid and sort the nodes by distance. Because we set the starting node to zero, it will be at the beginning. We unshift that starting node from the graph and get the up right left down neighbors. We then update all those distances + 1 and set the previous node. Diagonal nodes will have a previous of either one of the adjacent nodes because the distance is the same. All that matters is which one is in the queue first. a map of distances will be created until the finish node is found. Once the finish node is found, an array of visited nodes in order (due to closest nodes being searched first) will be returned. Visited nodes are visualized and the shortest path is found by backtracking from the finish node to the starting node through currendNode.previousnode
+//the shortest path is able to be found because whenever you are setting node.previous node, you are only searching for the next node a distance of 1 square away.
+//question how does the sort algorithim determine which goes first when all of the distances are the same

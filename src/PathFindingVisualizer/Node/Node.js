@@ -18,6 +18,7 @@ const Node = ({
     : isWall
     ? `node-wall`
     : ``;
+
   return (
     <div
       id={`node-${row}-${col}`}

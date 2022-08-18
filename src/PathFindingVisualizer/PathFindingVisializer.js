@@ -5,6 +5,7 @@ import { setGrid } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import visualizeAlgo from "./redux/hooks/visualizeAlgo.js";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
+
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
@@ -15,17 +16,11 @@ const PathFindingVisializer = () => {
   const nodes = useSelector((state) => state.grid);
   const { getNewGridWithWallToggled } = visualizeAlgo();
   const [click, setClick] = useState(false);
-
-  useEffect(() => {
-    console.log(click);
-  }, [click]);
-
   useEffect(() => {
     dispatch(setGrid());
   }, []);
 
   function handleMouseDown(row, col) {
-    console.log(nodes[row][col]);
     const newGrid = getNewGridWithWallToggled(nodes, row, col);
     dispatch(setGrid(newGrid));
     setClick(true);
@@ -72,7 +67,6 @@ const PathFindingVisializer = () => {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    console.log(visitedNodesInOrder);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }

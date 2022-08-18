@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
