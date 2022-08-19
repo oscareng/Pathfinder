@@ -50,6 +50,10 @@ export const setGrid = (grid) => (dispatch) => {
   }
 };
 
+export const resetGrid = () => (dispatch) => {
+  const grid = createGridHelper();
+  dispatch(_createGrid(grid));
+};
 export default function gridReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_GRID:

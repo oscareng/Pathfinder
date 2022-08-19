@@ -4,6 +4,7 @@ export default function visualizeAlgo() {
   const START_NODE_COL = 15;
   const FINISH_NODE_ROW = 10;
   const FINISH_NODE_COL = 35;
+
   function getNewGridWithWallToggled(grid, row, col) {
     const newGrid = grid.slice();
     const node = newGrid[row][col];
@@ -11,6 +12,7 @@ export default function visualizeAlgo() {
     newGrid[row][col] = newNode;
     return newGrid;
   }
+
   function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
@@ -37,18 +39,24 @@ export default function visualizeAlgo() {
     }
   }
 
-  function visualizeDjikstra() {
-    const grid = nodes;
-    const startNode = grid[START_NODE_ROW][START_NODE_COL];
-    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+  function clearBoard() {
+    const matches = document.querySelectorAll(
+      "div.node-wall, div.node-shortest-path, node-visited"
+    );
+    matches.forEach((node) => {
+      if (node.id === "node-10-15") {
+        node.classList.add("node-start");
+      } else if (node.id === "node-10-35") {
+        node.classList.add("node-finish");
+      }
+      node.classList.remove("node-wall", "node-shortest-path", "node-visited");
+    });
   }
+
   return {
     getNewGridWithWallToggled,
     animateDijkstra,
     animateShortestPath,
-    visualizeDjikstra,
+    clearBoard,
   };
 }

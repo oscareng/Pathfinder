@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Node from "./Node/Node.js";
-import { setGrid } from "./redux/gridReducer";
+import { setGrid, resetGrid } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import visualizeAlgo from "./redux/hooks/visualizeAlgo.js";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
@@ -11,10 +11,10 @@ const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
 
-const PathFindingVisializer = () => {
+const PathFindingVisualizer = () => {
   const dispatch = useDispatch();
   const nodes = useSelector((state) => state.grid);
-  const { getNewGridWithWallToggled } = visualizeAlgo();
+  const { getNewGridWithWallToggled, clearBoard } = visualizeAlgo();
   const [click, setClick] = useState(false);
   useEffect(() => {
     dispatch(setGrid());
@@ -36,7 +36,7 @@ const PathFindingVisializer = () => {
     dispatch(setGrid(newGrid));
   }
 
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -68,7 +68,7 @@ const PathFindingVisializer = () => {
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   function visualizeAStar() {
@@ -76,16 +76,23 @@ const PathFindingVisializer = () => {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const aStarObj = aStar(grid, startNode, finishNode);
-    console.log(aStarObj.path);
     const visitedNodesInOrder = aStarObj.nodesVisited;
     const nodesInShortestPathOrder = aStarObj.path;
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   return nodes !== undefined ? (
     <>
       <button onClick={() => visualizeAStar()}>
         {" "}
         Visualize Dijkstra's Algorithm
+      </button>
+      <button
+        onClick={() => {
+          dispatch(resetGrid());
+          clearBoard();
+        }}
+      >
+        Clear Board
       </button>
       <div className="grid">
         {nodes.map((row, rowIdx) => {
@@ -118,4 +125,4 @@ const PathFindingVisializer = () => {
   );
 };
 
-export default PathFindingVisializer;
+export default PathFindingVisualizer;

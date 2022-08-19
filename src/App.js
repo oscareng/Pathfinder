@@ -1,5 +1,5 @@
 import React from "react";
-import PathFindingisualizer from "./PathFindingVisualizer/PathFindingVisializer.js";
+import PathFindingisualizer from "./PathFindingVisualizer/PathFindingVisualizer.js";
 import { Provider } from "react-redux";
 import store from "./store.js";
 

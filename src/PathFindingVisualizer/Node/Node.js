@@ -11,7 +11,7 @@ const Node = ({
   onMouseEnter,
   onMouseUp,
 }) => {
-  const extraClassName = isFinish
+  let extraClassName = isFinish
     ? "node-finish"
     : isStart
     ? "node-start"
