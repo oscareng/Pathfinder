@@ -11,8 +11,8 @@
 // }
 
 export function aStar(nodes, startNode, endNode) {
-  const nodesVisited = [];
   console.log(nodes);
+  const nodesVisited = [];
   startNode.distanceFromStart = 0;
   startNode.estimatedDistanceToEnd = calculateManhattanDistance(
     startNode,
@@ -22,11 +22,13 @@ export function aStar(nodes, startNode, endNode) {
   const nodesToVisit = new MinHeap([startNode]);
 
   while (!nodesToVisit.isEmpty()) {
+    console.log(nodesToVisit);
     const currentMinDistanceNode = nodesToVisit.remove();
     nodesVisited.push(currentMinDistanceNode);
     if (currentMinDistanceNode === endNode) break;
 
     const neighbors = getNeighboringNodes(currentMinDistanceNode, nodes);
+    console.log(neighbors);
     for (const neighbor of neighbors) {
       if (neighbor.isWall) continue;
 

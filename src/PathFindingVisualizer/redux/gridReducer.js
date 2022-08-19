@@ -23,6 +23,7 @@ function createGridHelper() {
     const currentRow = [];
     for (let col = 0; col < 51; col++) {
       const currentNode = {
+        id: `node-${row}-${col}`,
         col,
         row,
         isStart: row === START_NODE_ROW && col === START_NODE_COL,
