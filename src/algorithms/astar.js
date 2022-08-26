@@ -35,8 +35,7 @@ export function aStar(nodes, startNode, endNode) {
       }
     }
   }
-  const path = getNodesInShortestPathOrder(endNode);
-  return { path, nodesVisited };
+  return nodesVisited;
 }
 
 function calculateManhattanDistance(currentNode, endNode) {
@@ -71,16 +70,6 @@ function getNeighboringNodes(node, nodes) {
     neighbors.push(nodes[row][col - 1]);
   }
   return neighbors;
-}
-
-export function getNodesInShortestPathOrder(finishNode) {
-  const nodesInShortestPathOrder = [];
-  let currentNode = finishNode;
-  while (currentNode !== undefined) {
-    nodesInShortestPathOrder.unshift(currentNode);
-    currentNode = currentNode.previousNode;
-  }
-  return nodesInShortestPathOrder;
 }
 
 class MinHeap {

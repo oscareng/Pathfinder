@@ -21,7 +21,7 @@ function createGridHelper() {
   const nodes = [];
   for (let row = 0; row < 20; row++) {
     const currentRow = [];
-    for (let col = 0; col < 51; col++) {
+    for (let col = 0; col < 50; col++) {
       const currentNode = {
         id: `node-${row}-${col}`,
         col,

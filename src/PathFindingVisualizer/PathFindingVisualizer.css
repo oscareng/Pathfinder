@@ -1,3 +1,19 @@
-.grid {
-  margin: 100px 0 0;
+.main {
+  display: flex;
 }
+
+.grid {
+  font-size: 0;
+  width: 100%;
+}
+/* 
+.grid::before {
+  content: "";
+  width: calc(var(--s) / 2 + var(--m));
+  float: left;
+  height: 100%;
+  shape-outside: repeating-linear-gradient(
+    #0000 0 calc(var(--f) - 3px),
+    #000 0 var(--f)
+  );
+} */

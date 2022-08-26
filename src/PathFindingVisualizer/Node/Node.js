@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./Node.css";
 
 const Node = ({
@@ -10,7 +11,10 @@ const Node = ({
   onMouseDown,
   onMouseEnter,
   onMouseUp,
+  distance,
 }) => {
+  const nodes = useSelector((state) => state.grid);
+
   let extraClassName = isFinish
     ? "node-finish"
     : isStart
@@ -20,13 +24,17 @@ const Node = ({
     : ``;
 
   return (
-    <div
-      id={`node-${row}-${col}`}
-      className={`node ${extraClassName}`}
-      onMouseDown={() => onMouseDown(row, col)}
-      onMouseEnter={() => onMouseEnter(row, col)}
-      onMouseUp={() => onMouseUp()}
-    ></div>
+    <div className="node-container">
+      <div
+        id={`node-${row}-${col}`}
+        className={`node ${extraClassName}`}
+        onMouseDown={() => onMouseDown(row, col)}
+        onMouseEnter={() => onMouseEnter(row, col)}
+        onMouseUp={() => onMouseUp()}
+      >
+        {nodes[row][col].distance === Infinity ? "" : nodes[row][col].distance}
+      </div>
+    </div>
   );
 };
 

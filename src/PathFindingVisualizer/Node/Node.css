@@ -1,10 +1,40 @@
+.node-container {
+  position: relative;
+  background: purple;
+  width: var(--s);
+  height: var(--s);
+  display: inline-block;
+  box-sizing: border-box;
+  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+  margin-bottom: calc(var(--m) - var(--s) * 0.2886);
+  color: black;
+}
+
 .node {
+  color: black;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  display: inline-block;
+  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+  margin-bottom: calc(var(--m) - var(--s) * 0.2886);
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .node {
   width: 20px;
   height: 20px;
   outline: 1px solid grey;
   display: inline-block;
-}
-
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+} */
 .node-finish {
   background-color: red;
 }

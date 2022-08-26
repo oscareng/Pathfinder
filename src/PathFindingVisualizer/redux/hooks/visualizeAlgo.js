@@ -1,10 +1,4 @@
-import { dijkstra } from "../../../algorithms/dijkstra";
 export default function visualizeAlgo() {
-  const START_NODE_ROW = 10;
-  const START_NODE_COL = 15;
-  const FINISH_NODE_ROW = 10;
-  const FINISH_NODE_COL = 35;
-
   function getNewGridWithWallToggled(grid, row, col) {
     const newGrid = grid.slice();
     const node = newGrid[row][col];
@@ -12,7 +6,15 @@ export default function visualizeAlgo() {
     newGrid[row][col] = newNode;
     return newGrid;
   }
-
+  function getNodesInShortestPathOrder(finishNode) {
+    const nodesInShortestPathOrder = [];
+    let currentNode = finishNode;
+    while (currentNode !== undefined) {
+      nodesInShortestPathOrder.unshift(currentNode);
+      currentNode = currentNode.previousNode;
+    }
+    return nodesInShortestPathOrder;
+  }
   function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
@@ -41,7 +43,7 @@ export default function visualizeAlgo() {
 
   function clearBoard() {
     const matches = document.querySelectorAll(
-      "div.node-wall, div.node-shortest-path, node-visited"
+      "div.node-wall, div.node-shortest-path, div.node-visited"
     );
     matches.forEach((node) => {
       if (node.id === "node-10-15") {
@@ -57,6 +59,7 @@ export default function visualizeAlgo() {
     getNewGridWithWallToggled,
     animateDijkstra,
     animateShortestPath,
+    getNodesInShortestPathOrder,
     clearBoard,
   };
 }
