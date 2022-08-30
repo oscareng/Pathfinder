@@ -11,6 +11,7 @@ export default function visualizeAlgo() {
     let currentNode = finishNode;
     while (currentNode !== undefined) {
       nodesInShortestPathOrder.unshift(currentNode);
+      console.log(currentNode.previousNode);
       currentNode = currentNode.previousNode;
     }
     return nodesInShortestPathOrder;

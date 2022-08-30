@@ -6,7 +6,7 @@
   font-size: 0;
   width: 100%;
 }
-/* 
+
 .grid::before {
   content: "";
   width: calc(var(--s) / 2 + var(--m));
@@ -16,4 +16,4 @@
     #0000 0 calc(var(--f) - 3px),
     #000 0 var(--f)
   );
-} */
+}

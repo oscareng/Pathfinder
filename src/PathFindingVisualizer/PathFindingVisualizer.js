@@ -114,7 +114,8 @@ const PathFindingVisualizer = () => {
       <Navbar></Navbar>
       <button
         onClick={() => {
-          sortAlgorithms();
+          // sortAlgorithms();
+          visualizeDjikstra();
         }}
       >
         Visualize!
