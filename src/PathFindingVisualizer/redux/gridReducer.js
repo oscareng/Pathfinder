@@ -33,6 +33,7 @@ function createGridHelper() {
         distance: Infinity,
         distanceFromStart: Infinity,
         estimatedDistanceToEnd: Infinity,
+        isWeight: false,
       };
       currentRow.push(currentNode);
     }

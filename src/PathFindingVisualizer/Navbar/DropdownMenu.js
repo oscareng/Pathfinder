@@ -59,6 +59,8 @@ function DropdownMenu(props) {
           ""
         )}
         {props.children}
+
+        <span className="icon-right">{props.rightIcon}</span>
       </a>
     );
   }
@@ -73,10 +75,10 @@ function DropdownMenu(props) {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem goToMenu="algorithms">
+          <DropdownItem rightIcon=">" goToMenu="algorithms">
             Pathfinding Algorithm
           </DropdownItem>
-          <DropdownItem>Maze Generator</DropdownItem>
+          <DropdownItem rightIcon=">">Maze Generator</DropdownItem>
         </div>
       </CSSTransition>
 
@@ -88,14 +90,14 @@ function DropdownMenu(props) {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem
-            goToMenu="main"
-            leftIcon={<ArrowBackIcon />}
-          ></DropdownItem>
+          <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
+            {" "}
+            Algorithms & Mazes
+          </DropdownItem>
           <DropdownItem algo="astar" goToMenu="main">
             A* Search
           </DropdownItem>
-          <DropdownItem algo="djikstra" goToMenu="main">
+          <DropdownItem algo="dijkstra" goToMenu="main">
             Dijkstra's
           </DropdownItem>
           <DropdownItem algo="breadthFirstSearch" goToMenu="main">

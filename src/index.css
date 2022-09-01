@@ -16,7 +16,7 @@ code {
   --bg: #242526;
   --bg-accent: #484a4d;
   --text-color: #dadce1;
-  --nav-size: 60px;
+  --nav-size: 120px;
   --border: 1px solid #474a4d;
   --border-radius: 8px;
   --speed: 500ms;
@@ -25,3 +25,7 @@ code {
   --f: calc(var(--s) * 1.26 + 4 * var(--m));
 }
 /*17.316 -- 2* overlap*/
+.mainpage {
+  height: 100%;
+  width: 100%;
+}

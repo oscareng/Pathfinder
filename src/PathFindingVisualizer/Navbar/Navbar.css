@@ -31,7 +31,7 @@ a {
 }
 
 .icon-button {
-  --buton-size: calc(var(--nav-size) * 0.8);
+  --button-size: calc(var(--nav-size) * 0.5);
   width: var(--button-size);
   height: var(--button-size);
   background-color: #484a4d;
@@ -42,10 +42,13 @@ a {
   justify-content: center;
   align-items: center;
 }
+.icon-right {
+  margin-left: auto;
+}
 
 .dropdown {
   position: absolute;
-  top: 58px;
+  top: 118px;
   width: 300px;
   transform: translateX(-45%);
   background-color: var(--bg);

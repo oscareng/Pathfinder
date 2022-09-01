@@ -22,8 +22,6 @@
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
   margin-bottom: calc(var(--m) - var(--s) * 0.2886);
   font-size: 20px;
-  justify-content: center;
-  align-items: center;
 }
 
 /* .node {

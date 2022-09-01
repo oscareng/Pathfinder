@@ -58,11 +58,25 @@ function getNeighboringNodes(node, nodes) {
   if (row < numRows - 1) {
     neighbors.push(nodes[row + 1][col]);
   }
-
+  if (row < nodes.length - 1 && row % 2 === 1 && col < numCols - 1) {
+    nodes[row + 1][col + 1].diagonal = true;
+    neighbors.push(nodes[row + 1][col + 1]);
+  }
+  if (row < nodes.length - 1 && row % 2 === 0 && col > 0) {
+    nodes[row + 1][col - 1].diagonal = true;
+    neighbors.push(nodes[row + 1][col - 1]);
+  }
   if (row > 0) {
     neighbors.push(nodes[row - 1][col]);
   }
-
+  if (row > 0 && row % 2 === 1 && col < numCols - 1) {
+    nodes[row - 1][col + 1].diagonal = true;
+    neighbors.push(nodes[row - 1][col + 1]);
+  }
+  if (row > 0 && row % 2 === 1 && col < numCols - 1) {
+    nodes[row - 1][col + 1].diagonal = true;
+    neighbors.push(nodes[row - 1][col + 1]);
+  }
   if (col < numCols - 1) {
     neighbors.push(nodes[row][col + 1]);
   }

@@ -18,10 +18,9 @@ const _setAlgorithim = (key) => ({
 });
 
 export const setAlgorithim = (key) => (dispatch) => {
-  console.log(key);
   if (key === "astar") {
     dispatch(_setAlgorithim(key));
-  } else if (key === "djikstra") {
+  } else if (key === "dijkstra") {
     dispatch(_setAlgorithim(key));
   } else if (key === "breadthFirstSearch") {
     dispatch(_setAlgorithim(key));

@@ -29,8 +29,6 @@ function sortNodesByDistance(unvisitedNodes) {
 
 function updateUnvisitedNeighbors(node, grid) {
   const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
-  console.log(node);
-  console.log(unvisitedNeighbors);
   for (const neighbor of unvisitedNeighbors) {
     if (neighbor.isVisited) continue;
     neighbor.isVisited = true;

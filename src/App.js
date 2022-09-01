@@ -5,11 +5,9 @@ import store from "./store.js";
 
 const App = () => {
   return (
-    <div>
-      <Provider store={store}>
-        <PathFindingisualizer></PathFindingisualizer>
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <PathFindingisualizer></PathFindingisualizer>
+    </Provider>
   );
 };
 
