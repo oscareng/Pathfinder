@@ -25,7 +25,3 @@ code {
   --f: calc(var(--s) * 1.26 + 4 * var(--m));
 }
 /*17.316 -- 2* overlap*/
-.mainpage {
-  height: 100%;
-  width: 100%;
-}

@@ -5,23 +5,23 @@ import { toggleMenu } from "../redux/navBarReducer";
 import DropdownMenu from "./DropdownMenu";
 
 function Navitem(props) {
-  const open = useSelector((state) => state.menu.status);
+  const open = useSelector((state) => state.menu.SettingsMenuStatus);
   const dispatch = useDispatch();
   const btnFunction = props.function;
-
+  let extraClassName = open ? "icon-button-active" : "";
   if (props.dropdown === true) {
     return (
       <li className="nav-item">
         <a
           href="#"
-          className="icon-button"
+          className={`icon-button ${extraClassName}`}
           onClick={() => {
             dispatch(toggleMenu(!open));
           }}
         >
           {props.icon}
         </a>
-        {open ? <DropdownMenu /> : ""}
+        {open ? <DropdownMenu menuType="settings" /> : ""}
       </li>
     );
   }

@@ -5,15 +5,16 @@ import { setGrid, resetGrid } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import Navbar from "./Navbar/Navbar.js";
 import useVisualizeAlgo from "./redux/hooks/visualizeAlgo.js";
+import useVisualizeGraph from "./redux/hooks/useVisualizeGraph.js";
+
 const PathFindingVisualizer = () => {
+  const hex = useSelector((state) => state.menu.hex);
   const dispatch = useDispatch();
   const nodes = useSelector((state) => state.grid);
-  const {
-    getNewGridWithWallToggled,
-    clearBoard,
-    getNodesInShortestPathOrder,
-    sortAlgorithms,
-  } = useVisualizeAlgo();
+  const { getNodesInShortestPathOrder, sortAlgorithms } = useVisualizeAlgo();
+  const { getNewGridWithWallToggled, getNewGridWithWeightToggled } =
+    useVisualizeGraph();
+
   const [click, setClick] = useState(false);
 
   useEffect(() => {
@@ -21,8 +22,11 @@ const PathFindingVisualizer = () => {
   }, []);
 
   function handleMouseDown(row, col) {
-    const newGrid = getNewGridWithWallToggled(nodes, row, col);
-    dispatch(setGrid(newGrid));
+    if (hex === "wall") {
+      const newGrid = getNewGridWithWallToggled(nodes, row, col);
+      dispatch(setGrid(newGrid));
+    }
+
     setClick(true);
   }
 
@@ -38,7 +42,7 @@ const PathFindingVisualizer = () => {
 
   return nodes !== undefined ? (
     <>
-      <Navbar sortAlgorithms={sortAlgorithms}></Navbar>
+      <Navbar className="navbar" sortAlgorithms={sortAlgorithms}></Navbar>
       <div className="main">
         <div className="grid">
           {nodes.map((row, rowIdx) => {

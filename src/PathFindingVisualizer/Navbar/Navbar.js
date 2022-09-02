@@ -1,22 +1,26 @@
 import React from "react";
 import "./Navbar.css";
 import Navitem from "./Navitem";
-import Playbutton from "./PlayButton";
-import FunctionsIcon from "@mui/icons-material/Functions";
+import SettingsIcon from "@mui/icons-material/Settings";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import useVisualizeGraph from "../redux/hooks/useVisualizeGraph";
+import Selector from "./Selector.js";
 const Navbar = (props) => {
-  const { sortAlgorithms, clearBoard } = useVisualizeAlgo();
+  const { sortAlgorithms } = useVisualizeAlgo();
+  const { clearBoard } = useVisualizeGraph();
+
   return (
     <nav className="navbar">
       <ul className="navbar-nav">
+        <Selector></Selector>
         <Navitem
           function={sortAlgorithms}
           icon={<PlayArrowIcon />}
           dropdown={false}
         ></Navitem>
-        <Navitem icon={<FunctionsIcon />} dropdown={true}></Navitem>
+        <Navitem icon={<SettingsIcon />} dropdown={true}></Navitem>
         <Navitem
           function={clearBoard}
           icon={<RestartAltIcon />}

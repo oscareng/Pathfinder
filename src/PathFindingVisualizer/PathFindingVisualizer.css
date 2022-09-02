@@ -1,11 +1,13 @@
 .main {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - var(--nav-size) - 1px);
+  justify-content: center;
 }
 
 .grid {
   font-size: 0;
-  width: 100%;
+  width: 70%;
+  padding-top: 20%;
 }
 
 .grid::before {

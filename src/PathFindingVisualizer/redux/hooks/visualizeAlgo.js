@@ -18,20 +18,11 @@ export default function useVisualizeAlgo() {
   const FINISH_NODE_ROW = 10;
   const FINISH_NODE_COL = 35;
 
-  function getNewGridWithWallToggled(grid, row, col) {
-    const newGrid = grid.slice();
-    const node = newGrid[row][col];
-    const newNode = { ...node, isWall: !node.isWall };
-    newGrid[row][col] = newNode;
-    return newGrid;
-  }
-
   function getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
     while (currentNode !== undefined) {
       nodesInShortestPathOrder.unshift(currentNode);
-      console.log(currentNode.previousNode);
       currentNode = currentNode.previousNode;
     }
     return nodesInShortestPathOrder;
@@ -61,20 +52,6 @@ export default function useVisualizeAlgo() {
           "node node-shortest-path";
       }, 50 * i);
     }
-  }
-
-  function clearBoard() {
-    const matches = document.querySelectorAll(
-      "div.node-wall, div.node-shortest-path, div.node-visited"
-    );
-    matches.forEach((node) => {
-      if (node.id === "node-10-15") {
-        node.classList.add("node-start");
-      } else if (node.id === "node-10-35") {
-        node.classList.add("node-finish");
-      }
-      node.classList.remove("node-wall", "node-shortest-path", "node-visited");
-    });
   }
 
   function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -146,11 +123,9 @@ export default function useVisualizeAlgo() {
   }
 
   return {
-    getNewGridWithWallToggled,
     animateDijkstra,
     animateShortestPath,
     getNodesInShortestPathOrder,
-    clearBoard,
     animateAlgorithm,
     animateShortestPath,
     visualizeDjikstra,

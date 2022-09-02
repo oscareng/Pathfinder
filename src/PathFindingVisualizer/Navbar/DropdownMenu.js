@@ -2,32 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { CSSTransition } from "react-transition-group";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { toggleMenu } from "../redux/navBarReducer";
-import { useDispatch } from "react-redux";
-import { setAlgorithim } from "../redux/navBarReducer";
-
+import { useDispatch, useSelector } from "react-redux";
+import DropdownItem from "./DropDownItem.js";
+import { setAlgorithim, setHex } from "../redux/navBarReducer";
 function DropdownMenu(props) {
-  const dispatch = useDispatch();
-  const [activeMenu, setActiveMenu] = useState("main");
+  const activeMenu = useSelector((state) => state.menu.ActiveSettingsMenu);
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
-
-  // useEffect(() => {
-  //   const closeDropDown = (e) => {
-  //     console.log(e);
-  //     if (
-  //       e.target !== props.navItemRef.current &&
-  //       e.target !== props.iconRef.current &&
-  //       e.target !== props.iconBtnRef.current &&
-  //       e.target !== dropdownRef.current
-  //     ) {
-  //       dispatch(toggleMenu(false));
-  //     }
-  //   };
-  //   document.body.addEventListener("click", closeDropDown);
-
-  //   return () => document.body.removeEventListener("click", closeDropDown);
-  // }, []);
 
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
@@ -38,33 +19,66 @@ function DropdownMenu(props) {
     setMenuHeight(height);
   }
 
-  function DropdownItem(props) {
+  if (props.menuType === "settings") {
     return (
-      <a
-        href="#"
-        className="menu-item"
-        onClick={() => {
-          props.goToMenu && setActiveMenu(props.goToMenu);
-          props.algo && dispatch(setAlgorithim(props.algo));
-        }}
+      <div
+        className="dropdown"
+        style={{ height: menuHeight }}
+        ref={dropdownRef}
       >
-        {props.leftIcon ? (
-          <span
-            className="icon-button"
-            onClick={() => setActiveMenu(props.goToMenu)}
-          >
-            {props.leftIcon}
-          </span>
-        ) : (
-          ""
-        )}
-        {props.children}
+        <CSSTransition
+          in={activeMenu === "main"}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-primary"
+          onEnter={calcHeight}
+        >
+          <div className="menu">
+            <DropdownItem rightIcon=">" goToMenu="algorithms">
+              Pathfinding Algorithm
+            </DropdownItem>
+            <DropdownItem rightIcon=">">Maze Generator</DropdownItem>
+          </div>
+        </CSSTransition>
 
-        <span className="icon-right">{props.rightIcon}</span>
-      </a>
+        <CSSTransition
+          in={activeMenu === "algorithms"}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-algorithm"
+          onEnter={calcHeight}
+        >
+          <div className="menu">
+            <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
+              {" "}
+              Algorithms & Mazes
+            </DropdownItem>
+            <DropdownItem
+              dropDownFunction={setAlgorithim}
+              algo="astar"
+              goToMenu="main"
+            >
+              A* Search
+            </DropdownItem>
+            <DropdownItem
+              dropDownFunction={setAlgorithim}
+              algo="dijkstra"
+              goToMenu="main"
+            >
+              Dijkstra's
+            </DropdownItem>
+            <DropdownItem
+              dropDownFunction={setAlgorithim}
+              algo="breadthFirstSearch"
+              goToMenu="main"
+            >
+              Breadth First Search
+            </DropdownItem>
+          </div>
+        </CSSTransition>
+      </div>
     );
   }
-
   return (
     <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
       <CSSTransition
@@ -75,33 +89,33 @@ function DropdownMenu(props) {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem rightIcon=">" goToMenu="algorithms">
-            Pathfinding Algorithm
+          <DropdownItem
+            hex="wall"
+            dropDownFunction={setHex}
+            rightIcon={props.wallIcon}
+          >
+            Walls
           </DropdownItem>
-          <DropdownItem rightIcon=">">Maze Generator</DropdownItem>
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={activeMenu === "algorithms"}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-algorithm"
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
-            {" "}
-            Algorithms & Mazes
+          <DropdownItem
+            hex="weight"
+            dropDownFunction={setHex}
+            rightIcon={props.weightIcon}
+          >
+            Weights
           </DropdownItem>
-          <DropdownItem algo="astar" goToMenu="main">
-            A* Search
+          <DropdownItem
+            hex="start"
+            dropDownFunction={setHex}
+            rightIcon={props.startIcon}
+          >
+            Start
           </DropdownItem>
-          <DropdownItem algo="dijkstra" goToMenu="main">
-            Dijkstra's
-          </DropdownItem>
-          <DropdownItem algo="breadthFirstSearch" goToMenu="main">
-            Breadth First Search
+          <DropdownItem
+            hex="finish"
+            dropDownFunction={setHex}
+            rightIcon={props.finishIcon}
+          >
+            Finish
           </DropdownItem>
         </div>
       </CSSTransition>
