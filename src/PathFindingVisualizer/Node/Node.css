@@ -43,6 +43,12 @@
 .node-wall {
   background-color: black;
 }
+.node-wall-icon {
+  background-color: rgb(12, 53, 71);
+}
+.node-weight {
+  background-color: blue;
+}
 .node-visited {
   animation-name: visitedAnimation;
   animation-duration: 1.5s;

@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Node from "./Node/Node.js";
-import { setGrid, resetGrid } from "./redux/gridReducer";
+import { setGrid, resetGrid, setStartOrFinish } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import Navbar from "./Navbar/Navbar.js";
 import useVisualizeAlgo from "./redux/hooks/visualizeAlgo.js";
-import useVisualizeGraph from "./redux/hooks/useVisualizeGraph.js";
+import useVisualizeGraph from "./redux/hooks/useGraph.js";
 
 const PathFindingVisualizer = () => {
   const hex = useSelector((state) => state.menu.hex);
   const dispatch = useDispatch();
-  const nodes = useSelector((state) => state.grid);
+  const nodes = useSelector((state) => state.grid.grid);
+  const startNode = useSelector((state) => state.grid.start);
+  const endNode = useSelector((state) => state.grid.finish);
   const { getNodesInShortestPathOrder, sortAlgorithms } = useVisualizeAlgo();
-  const { getNewGridWithWallToggled, getNewGridWithWeightToggled } =
-    useVisualizeGraph();
+  const {
+    getNewGridWithWallToggled,
+    getNewGridWithWeightToggled,
+    getNewGridWithNewStartOrFinishChanged,
+  } = useVisualizeGraph();
 
   const [click, setClick] = useState(false);
 
@@ -25,8 +30,30 @@ const PathFindingVisualizer = () => {
     if (hex === "wall") {
       const newGrid = getNewGridWithWallToggled(nodes, row, col);
       dispatch(setGrid(newGrid));
+    } else if (hex === "weight") {
+      const newGrid = getNewGridWithWeightToggled(nodes, row, col);
+      dispatch(setGrid(newGrid));
+    } else if (hex === "start") {
+      const newGrid = getNewGridWithNewStartOrFinishChanged(
+        nodes,
+        row,
+        col,
+        startNode,
+        hex
+      );
+      dispatch(setStartOrFinish(row, col, hex));
+      dispatch(setGrid(newGrid));
+    } else if (hex === "finish") {
+      const newGrid = getNewGridWithNewStartOrFinishChanged(
+        nodes,
+        row,
+        col,
+        endNode,
+        hex
+      );
+      dispatch(setStartOrFinish(row, col, hex));
+      dispatch(setGrid(newGrid));
     }
-
     setClick(true);
   }
 
@@ -36,8 +63,13 @@ const PathFindingVisualizer = () => {
 
   function handleMouseEnter(row, col) {
     if (click === false) return;
-    const newGrid = getNewGridWithWallToggled(nodes, row, col);
-    dispatch(setGrid(newGrid));
+    if (hex === "wall") {
+      const newGrid = getNewGridWithWallToggled(nodes, row, col);
+      dispatch(setGrid(newGrid));
+    } else if (hex === "weight") {
+      const newGrid = getNewGridWithWeightToggled(nodes, row, col);
+      dispatch(setGrid(newGrid));
+    }
   }
 
   return nodes !== undefined ? (
@@ -58,9 +90,11 @@ const PathFindingVisualizer = () => {
                     key,
                     id,
                     distance,
+                    isWeight,
                   } = node;
                   return (
                     <Node
+                      isWeight={isWeight}
                       distance={distance}
                       id={id}
                       row={row}

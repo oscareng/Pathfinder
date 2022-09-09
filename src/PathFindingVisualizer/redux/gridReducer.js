@@ -1,27 +1,61 @@
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
-const initialState = [];
+import useVisualizeGraph from "./hooks/useGraph";
+const START_NODE_ROW = 9;
+const START_NODE_COL = 10;
+const FINISH_NODE_ROW = 9;
+const FINISH_NODE_COL = 28;
+const initialState = {
+  grid: [],
+  start: { row: 9, col: 10 },
+  finish: { row: 9, col: 28 },
+};
 
 const CREATE_GRID = "CREATE_GRID";
-const MOUSE_IS_PRESSED = "MOUSE_IS_PRESSED";
+const SET_START = "SET_START";
+const SET_FINISH = "SET_FINISH";
+// const MOUSE_IS_PRESSED = "MOUSE_IS_PRESSED";
 
 const _createGrid = (grid) => ({
   type: CREATE_GRID,
   grid,
 });
 
-export const mouseIsPressed = (mouseDown) => ({
-  type: mouseIsPressed,
-  mouseDown,
+const setStart = (start) => ({
+  type: SET_START,
+  start,
 });
+
+const setFinish = (finish) => ({
+  type: SET_FINISH,
+  finish,
+});
+
+// export const mouseIsPressed = (mouseDown) => ({
+//   type: mouseIsPressed,
+//   mouseDown,
+// });
+
+export const setGrid = (grid) => (dispatch) => {
+  if (!grid) {
+    const grid = createGridHelper();
+    dispatch(_createGrid(grid));
+  } else {
+    dispatch(_createGrid(grid));
+  }
+};
+
+export const setStartOrFinish = (row, col, hex) => (dispatch) => {
+  if (hex === "start") {
+    dispatch(setStart({ row, col }));
+  } else if (hex === "finish") {
+    dispatch(setFinish({ row, col }));
+  }
+};
 
 function createGridHelper() {
   const nodes = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row <= 18; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col <= 38; col++) {
       const currentNode = {
         id: `node-${row}-${col}`,
         col,
@@ -35,32 +69,28 @@ function createGridHelper() {
         estimatedDistanceToEnd: Infinity,
         isWeighted: false,
       };
+
       currentRow.push(currentNode);
     }
     nodes.push(currentRow);
   }
   return nodes;
 }
-
-export const setGrid = (grid) => (dispatch) => {
-  if (!grid) {
-    const grid = createGridHelper();
-    dispatch(_createGrid(grid));
-  } else {
-    dispatch(_createGrid(grid));
-  }
-};
-
 export const resetGrid = () => (dispatch) => {
+  // const { createGridHelper } = useVisualizeGraph();
   const grid = createGridHelper();
   dispatch(_createGrid(grid));
 };
 export default function gridReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_GRID:
-      return action.grid;
-    case MOUSE_IS_PRESSED:
-      return action.mouseDown;
+      return { ...state, grid: action.grid };
+    // case MOUSE_IS_PRESSED:
+    //   return action.mouseDown;
+    case SET_START:
+      return { ...state, start: action.start };
+    case SET_FINISH:
+      return { ...state, finish: action.finish };
     default:
       return state;
   }

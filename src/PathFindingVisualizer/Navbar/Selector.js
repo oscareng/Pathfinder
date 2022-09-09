@@ -31,7 +31,7 @@ const Selector = (props) => {
         <span className="nav-selector-text-left">Now Placing:</span>
         <span className="nav-selector-icon-right">
           {activeHex === "wall" ? (
-            <NodeIcon extraClassName="node-wall" />
+            <NodeIcon extraClassName="node-wall-icon" />
           ) : activeHex === "weight" ? (
             <DensitySmallIcon className="selector-icon" />
           ) : activeHex === "start" ? (
@@ -45,7 +45,7 @@ const Selector = (props) => {
       </a>
       {open ? (
         <DropdownMenu
-          wallIcon={<NodeIcon extraClassName="node-wall" />}
+          wallIcon={<NodeIcon extraClassName="node-wall-icon" />}
           startIcon={<NodeIcon extraClassName="node-start" />}
           finishIcon={<NodeIcon extraClassName="node-finish" />}
           weightIcon={<DensitySmallIcon />}

@@ -19,10 +19,7 @@ const DropdownItem = (props) => {
       }}
     >
       {props.leftIcon ? (
-        <span
-          className="icon-button"
-          onClick={() => dispatch(setActiveMenu(props.goToMenu))}
-        >
+        <span onClick={() => dispatch(setActiveMenu(props.goToMenu))}>
           {props.leftIcon}
         </span>
       ) : (

@@ -17,8 +17,9 @@ export function aStar(nodes, startNode, endNode) {
     for (const neighbor of neighbors) {
       if (neighbor.isWall) continue;
 
-      const tentativeDistanceToNeighbor =
-        currentMinDistanceNode.distanceFromStart + 1;
+      const tentativeDistanceToNeighbor = neighbor.isWeight
+        ? currentMinDistanceNode.distanceFromStart + 7
+        : currentMinDistanceNode.distanceFromStart + 1;
 
       if (tentativeDistanceToNeighbor >= neighbor.distanceFromStart) continue;
 

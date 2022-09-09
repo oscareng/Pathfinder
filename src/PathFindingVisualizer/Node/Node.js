@@ -12,8 +12,9 @@ const Node = ({
   onMouseEnter,
   onMouseUp,
   distance,
+  isWeight,
 }) => {
-  const nodes = useSelector((state) => state.grid);
+  const nodes = useSelector((state) => state.grid.grid);
 
   let extraClassName = isFinish
     ? "node-finish"
@@ -21,6 +22,8 @@ const Node = ({
     ? "node-start"
     : isWall
     ? `node-wall`
+    : isWeight
+    ? `node-weight`
     : ``;
 
   return (

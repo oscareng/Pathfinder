@@ -11,12 +11,13 @@ import { useSelector } from "react-redux";
 export default function useVisualizeAlgo() {
   const key = useSelector((state) => state.menu.algo);
   const dispatch = useDispatch();
-  const nodes = useSelector((state) => state.grid);
-
-  const START_NODE_ROW = 10;
-  const START_NODE_COL = 15;
-  const FINISH_NODE_ROW = 10;
-  const FINISH_NODE_COL = 35;
+  const nodes = useSelector((state) => state.grid.grid);
+  const { row: startRow, col: startCol } = useSelector(
+    (state) => state.grid.start
+  );
+  const { row: endRow, col: endCol } = useSelector(
+    (state) => state.grid.finish
+  );
 
   function getNodesInShortestPathOrder(finishNode) {
     const nodesInShortestPathOrder = [];
@@ -82,8 +83,9 @@ export default function useVisualizeAlgo() {
 
   function visualizeDjikstra() {
     const grid = nodes;
-    const startNode = grid[START_NODE_ROW][START_NODE_COL];
-    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    console.log(grid[startRow][startCol]);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -94,8 +96,8 @@ export default function useVisualizeAlgo() {
 
   function visualizeAStar() {
     const grid = nodes;
-    const startNode = grid[START_NODE_ROW][START_NODE_COL];
-    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -103,8 +105,8 @@ export default function useVisualizeAlgo() {
 
   function visualizeBreadthFirstSearch() {
     const grid = nodes;
-    const startNode = grid[START_NODE_ROW][START_NODE_COL];
-    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = breadthFirstSearch(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);

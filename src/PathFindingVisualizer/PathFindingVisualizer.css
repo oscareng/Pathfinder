@@ -7,7 +7,8 @@
 .grid {
   font-size: 0;
   width: 70%;
-  padding-top: 20%;
+  padding-top: 10%;
+  height: 100%;
 }
 
 .grid::before {
@@ -16,10 +17,7 @@
   float: left;
   height: 100%;
   shape-outside: repeating-linear-gradient(
-    #0000 0 calc(var(--f) - 3px),
+    #0000 0 calc(var(--f) - 2px),
     #000 0 var(--f)
   );
-}
-
-.row {
 }

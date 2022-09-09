@@ -5,7 +5,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import useVisualizeGraph from "../redux/hooks/useVisualizeGraph";
+import useVisualizeGraph from "../redux/hooks/useGraph";
 import Selector from "./Selector.js";
 const Navbar = (props) => {
   const { sortAlgorithms } = useVisualizeAlgo();

@@ -22,6 +22,6 @@ code {
   --speed: 500ms;
   --s: 30px;
   --m: 1.5px;
-  --f: calc(var(--s) * 1.26 + 4 * var(--m));
+  --f: calc(var(--s) * 1.299999 + 4 * var(--m));
 }
 /*17.316 -- 2* overlap*/
