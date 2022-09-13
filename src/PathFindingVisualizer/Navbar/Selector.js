@@ -2,7 +2,11 @@ import React from "react";
 import "./Navbar.css";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSelectorMenu } from "../redux/navBarReducer";
+import {
+  toggleMenu,
+  toggleSelectorMenu,
+  setActiveMenu,
+} from "../redux/navBarReducer";
 import DropdownMenu from "./DropdownMenu";
 
 const Selector = (props) => {
@@ -25,7 +29,9 @@ const Selector = (props) => {
         href="#"
         className="nav-selector-button"
         onClick={() => {
+          dispatch(setActiveMenu("main"));
           dispatch(toggleSelectorMenu(!open));
+          dispatch(toggleMenu(false));
         }}
       >
         <span className="nav-selector-text-left">Now Placing:</span>

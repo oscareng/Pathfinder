@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Node from "./Node/Node.js";
-import { setGrid, resetGrid, setStartOrFinish } from "./redux/gridReducer";
+import { setGrid, setStartOrFinish } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import Navbar from "./Navbar/Navbar.js";
 import useVisualizeAlgo from "./redux/hooks/visualizeAlgo.js";
 import useVisualizeGraph from "./redux/hooks/useGraph.js";
 
 const PathFindingVisualizer = () => {
-  const hex = useSelector((state) => state.menu.hex);
   const dispatch = useDispatch();
+
+  const hex = useSelector((state) => state.menu.hex);
   const nodes = useSelector((state) => state.grid.grid);
   const startNode = useSelector((state) => state.grid.start);
   const endNode = useSelector((state) => state.grid.finish);
-  const { getNodesInShortestPathOrder, sortAlgorithms } = useVisualizeAlgo();
+  const { sortAlgorithms } = useVisualizeAlgo();
   const {
     getNewGridWithWallToggled,
     getNewGridWithWeightToggled,

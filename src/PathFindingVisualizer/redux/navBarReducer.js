@@ -1,5 +1,3 @@
-import { Wallet } from "@mui/icons-material";
-
 const TOGGLE_SETTINGS_MENU = "TOGGLE_SETTINGS_MENU";
 const TOGGLE_ACTIVE_MENU = "TOGGLE_ACTIVE_MENU";
 const TOGGLE_SELECTOR_MENU = "TOGGLE_SELECTOR_MENU";

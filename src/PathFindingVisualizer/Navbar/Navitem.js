@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Navbar.css";
-import { toggleMenu } from "../redux/navBarReducer";
+import { toggleMenu, toggleSelectorMenu } from "../redux/navBarReducer";
 import DropdownMenu from "./DropdownMenu";
 
 function Navitem(props) {
-  const open = useSelector((state) => state.menu.SettingsMenuStatus);
+  const openSettings = useSelector((state) => state.menu.SettingsMenuStatus);
   const dispatch = useDispatch();
   const btnFunction = props.function;
-  let extraClassName = open ? "icon-button-active" : "";
+
+  let extraClassName = openSettings ? "icon-button-active" : "";
+
   if (props.dropdown === true) {
     return (
       <li className="nav-item">
@@ -16,12 +18,13 @@ function Navitem(props) {
           href="#"
           className={`icon-button ${extraClassName}`}
           onClick={() => {
-            dispatch(toggleMenu(!open));
+            dispatch(toggleMenu(!openSettings));
+            dispatch(toggleSelectorMenu(false));
           }}
         >
           {props.icon}
         </a>
-        {open ? <DropdownMenu menuType="settings" /> : ""}
+        {openSettings ? <DropdownMenu menuType="settings" /> : ""}
       </li>
     );
   }

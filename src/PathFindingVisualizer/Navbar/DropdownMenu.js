@@ -5,11 +5,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import DropdownItem from "./DropDownItem.js";
 import { setAlgorithim, setHex } from "../redux/navBarReducer";
+import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
 function DropdownMenu(props) {
   const activeMenu = useSelector((state) => state.menu.ActiveSettingsMenu);
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
-
+  const { visualizeRecursiveDFSMaze } = useVisualizeAlgo();
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
   }, []);
@@ -37,7 +38,9 @@ function DropdownMenu(props) {
             <DropdownItem rightIcon=">" goToMenu="algorithms">
               Pathfinding Algorithm
             </DropdownItem>
-            <DropdownItem rightIcon=">">Maze Generator</DropdownItem>
+            <DropdownItem rightIcon=">" goToMenu="mazes">
+              Maze Generator
+            </DropdownItem>
           </div>
         </CSSTransition>
 
@@ -73,6 +76,26 @@ function DropdownMenu(props) {
               goToMenu="main"
             >
               Breadth First Search
+            </DropdownItem>
+          </div>
+        </CSSTransition>
+        <CSSTransition
+          in={activeMenu === "mazes"}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-algorithm"
+          onEnter={calcHeight}
+        >
+          <div>
+            <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
+              {" "}
+              Algorithms & Mazes
+            </DropdownItem>
+            <DropdownItem
+              maze="recursiveDFS"
+              dropDownFunction={visualizeRecursiveDFSMaze}
+            >
+              Randomized DFS Maze
             </DropdownItem>
           </div>
         </CSSTransition>

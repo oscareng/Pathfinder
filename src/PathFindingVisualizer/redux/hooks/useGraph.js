@@ -1,10 +1,7 @@
-import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { setGrid, setStartOrFinish } from "../gridReducer";
 export default function useVisualizeGraph() {
-  const startRow = useSelector((state) => state.grid.startRow);
-  const startCol = useSelector((state) => state.grid.startCol);
-  const finishRow = useSelector((state) => state.grid.finishRow);
-  const finishCol = useSelector((state) => state.grid.finishCol);
+  const dispatch = useDispatch();
 
   function getNewGridWithWallToggled(grid, row, col) {
     const newGrid = grid.slice();
@@ -19,6 +16,17 @@ export default function useVisualizeGraph() {
     const node = newGrid[row][col];
     const newNode = { ...node, isWeight: !node.isWeight };
     newGrid[row][col] = newNode;
+    return newGrid;
+  }
+
+  function getNewGridWithAllWallsToggled(grid) {
+    const newGrid = grid.slice();
+    for (let i = 0; i < newGrid.length; i++) {
+      for (let j = 0; j < newGrid[i].length; j++) {
+        let node = newGrid[i][j];
+        node.isWall = true;
+      }
+    }
     return newGrid;
   }
 
@@ -54,47 +62,28 @@ export default function useVisualizeGraph() {
 
   function clearBoard() {
     const matches = document.querySelectorAll(
-      "div.node-wall, div.node-shortest-path, div.node-visited, div.node-weight"
+      "div.node-wall, div.node-shortest-path, div.node-visited, div.node-weight, div.node-start, div.node-finish"
     );
     matches.forEach((node) => {
-      if (node.id === "node-10-15") {
-        node.classList.add("node-start");
-      } else if (node.id === "node-10-35") {
-        node.classList.add("node-finish");
-      }
       node.classList.remove(
         "node-wall",
         "node-shortest-path",
         "node-visited",
-        "node-weight"
+        "node-weight",
+        "node-start",
+        "node-finish"
       );
     });
-  }
 
-  function createGridHelper() {
-    const nodes = [];
-    for (let row = 0; row <= 18; row++) {
-      const currentRow = [];
-      for (let col = 0; col <= 38; col++) {
-        const currentNode = {
-          id: `node-${row}-${col}`,
-          col,
-          row,
-          isStart: row === startRow && col === startCol,
-          isFinish: row === finishRow && col === finishCol,
-          isWall: false,
-          isVisited: false,
-          distance: Infinity,
-          distanceFromStart: Infinity,
-          estimatedDistanceToEnd: Infinity,
-          isWeighted: false,
-        };
+    dispatch(setGrid());
+    dispatch(setStartOrFinish(9, 10, "start"));
+    dispatch(setStartOrFinish(9, 28, "finish"));
 
-        currentRow.push(currentNode);
-      }
-      nodes.push(currentRow);
-    }
-    return nodes;
+    const start = document.getElementById("node-9-10");
+    const finish = document.getElementById("node-9-28");
+
+    start.classList.add("node-start");
+    finish.classList.add("node-finish");
   }
 
   return {
@@ -102,10 +91,6 @@ export default function useVisualizeGraph() {
     getNewGridWithWeightToggled,
     getNewGridWithNewStartOrFinishChanged,
     clearBoard,
-    startRow,
-    startCol,
-    finishCol,
-    finishRow,
-    createGridHelper,
+    getNewGridWithAllWallsToggled,
   };
 }

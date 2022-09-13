@@ -1,8 +1,8 @@
-import useVisualizeGraph from "./hooks/useGraph";
 const START_NODE_ROW = 9;
 const START_NODE_COL = 10;
 const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 28;
+
 const initialState = {
   grid: [],
   start: { row: 9, col: 10 },
@@ -12,44 +12,6 @@ const initialState = {
 const CREATE_GRID = "CREATE_GRID";
 const SET_START = "SET_START";
 const SET_FINISH = "SET_FINISH";
-// const MOUSE_IS_PRESSED = "MOUSE_IS_PRESSED";
-
-const _createGrid = (grid) => ({
-  type: CREATE_GRID,
-  grid,
-});
-
-const setStart = (start) => ({
-  type: SET_START,
-  start,
-});
-
-const setFinish = (finish) => ({
-  type: SET_FINISH,
-  finish,
-});
-
-// export const mouseIsPressed = (mouseDown) => ({
-//   type: mouseIsPressed,
-//   mouseDown,
-// });
-
-export const setGrid = (grid) => (dispatch) => {
-  if (!grid) {
-    const grid = createGridHelper();
-    dispatch(_createGrid(grid));
-  } else {
-    dispatch(_createGrid(grid));
-  }
-};
-
-export const setStartOrFinish = (row, col, hex) => (dispatch) => {
-  if (hex === "start") {
-    dispatch(setStart({ row, col }));
-  } else if (hex === "finish") {
-    dispatch(setFinish({ row, col }));
-  }
-};
 
 function createGridHelper() {
   const nodes = [];
@@ -68,6 +30,7 @@ function createGridHelper() {
         distanceFromStart: Infinity,
         estimatedDistanceToEnd: Infinity,
         isWeighted: false,
+        isVisitedMaze: false,
       };
 
       currentRow.push(currentNode);
@@ -76,17 +39,48 @@ function createGridHelper() {
   }
   return nodes;
 }
+
+const _createGrid = (grid) => ({
+  type: CREATE_GRID,
+  grid,
+});
+
+const setStart = (start) => ({
+  type: SET_START,
+  start,
+});
+
+const setFinish = (finish) => ({
+  type: SET_FINISH,
+  finish,
+});
+
+export const setGrid = (grid) => (dispatch) => {
+  if (!grid) {
+    const grid = createGridHelper();
+    dispatch(_createGrid(grid));
+  } else {
+    dispatch(_createGrid(grid));
+  }
+};
+
+export const setStartOrFinish = (row, col, hex) => (dispatch) => {
+  if (hex === "start") {
+    dispatch(setStart({ row, col }));
+  } else if (hex === "finish") {
+    dispatch(setFinish({ row, col }));
+  }
+};
+
 export const resetGrid = () => (dispatch) => {
-  // const { createGridHelper } = useVisualizeGraph();
   const grid = createGridHelper();
   dispatch(_createGrid(grid));
 };
+
 export default function gridReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_GRID:
       return { ...state, grid: action.grid };
-    // case MOUSE_IS_PRESSED:
-    //   return action.mouseDown;
     case SET_START:
       return { ...state, start: action.start };
     case SET_FINISH:
