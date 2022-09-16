@@ -31,23 +31,7 @@ export default function useVisualizeAlgo() {
     return nodesInShortestPathOrder;
   }
 
-  // function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-  //   for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-  //     if (i === visitedNodesInOrder.length) {
-  //       setTimeout(() => {
-  //         animateShortestPath(nodesInShortestPathOrder);
-  //       }, 10 * i);
-  //       return;
-  //     }
-  //     setTimeout(() => {
-  //       const node = visitedNodesInOrder[i];
-  //       document.getElementById(`node-${node.row}-${node.col}`).className =
-  //         "node node-visited";
-  //     }, 10 * i);
-  //   }
-  // }
-
-  function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
+  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -59,7 +43,23 @@ export default function useVisualizeAlgo() {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-visited";
-      }, 1000 * i);
+      }, 10 * i);
+    }
+  }
+
+  function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          animateShortestPath(nodesInShortestPathOrder);
+        }, 50 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node node-visited";
+      }, 50 * i);
     }
   }
 
@@ -79,10 +79,10 @@ export default function useVisualizeAlgo() {
     const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
     //set time out later
-    const newGrid = grid.slice();
-    dispatch(setGrid(newGrid));
+    // const newGrid = grid.slice();
+    // dispatch(setGrid(newGrid));
   }
 
   function visualizeAStar() {
@@ -107,13 +107,14 @@ export default function useVisualizeAlgo() {
     const grid = getNewGridWithAllWallsToggled(nodes);
     const startNode = grid[startRow][startCol];
     const finishNode = grid[endRow][endCol];
-    const visitedNodesInOrder = recursiveBackTrackerMaze(
-      grid,
-      startNode,
-      finishNode
-    );
+    // const visitedNodesInOrder = recursiveBackTrackerMaze(
+    //   grid,
+    //   startNode,
+    //   finishNode
+    // );
+    recursiveBackTrackerMaze(grid, startNode, finishNode);
     dispatch(setGrid(grid));
-    animateAlgorithm(visitedNodesInOrder, null);
+    // animateAlgorithm(visitedNodesInOrder, null);
   }
 
   function sortAlgorithms() {

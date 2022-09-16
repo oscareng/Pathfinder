@@ -24,6 +24,7 @@ export default function useVisualizeGraph() {
     for (let i = 0; i < newGrid.length; i++) {
       for (let j = 0; j < newGrid[i].length; j++) {
         let node = newGrid[i][j];
+        if (node.isStart || node.isFinish) continue;
         node.isWall = true;
       }
     }
