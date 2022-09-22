@@ -77,6 +77,7 @@ const PathFindingVisualizer = () => {
     <>
       <Navbar className="navbar" sortAlgorithms={sortAlgorithms}></Navbar>
       <div className="main">
+        <div className="background-logo">PATHFINDER</div>
         <div className="grid">
           {nodes.map((row, rowIdx) => {
             return (

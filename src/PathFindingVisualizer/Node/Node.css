@@ -1,13 +1,15 @@
 .node-container {
   position: relative;
-  background: purple;
+  background: linear-gradient(0deg, #dd13dd80 0%, #5fc8d47c 100%);
   width: var(--s);
   height: var(--s);
   display: inline-block;
   box-sizing: border-box;
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+
   margin-bottom: calc(var(--m) - var(--s) * 0.2886);
   color: black;
+  z-index: 0.5;
 }
 
 .node {
@@ -15,13 +17,13 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 28px;
-  height: 28px;
-  background: white;
+  width: var(--s);
+  height: var(--s);
+  background: transparent;
   display: inline-block;
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
   margin-bottom: calc(var(--m) - var(--s) * 0.2886);
-  font-size: 20px;
+  z-index: 0.5;
 }
 
 /* .node {
@@ -67,7 +69,7 @@
   }
 
   50% {
-    background-color: rgba(17, 104, 217, 0.75);
+    background-color: rgba(17, 120, 217, 0.75);
   }
 
   75% {
@@ -77,7 +79,7 @@
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: #5fc8d4;
   }
 }
 
@@ -99,16 +101,16 @@
 @keyframes shortestPath {
   0% {
     transform: scale(0.6);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 149, 0);
   }
 
   50% {
     transform: scale(1.2);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 195, 0);
   }
 
   100% {
     transform: scale(1);
-    background-color: rgb(255, 254, 106);
+    background-color: rgba(255, 234, 0, 0.774);
   }
 }

@@ -13,6 +13,7 @@ const Navbar = (props) => {
 
   return (
     <nav className="navbar">
+      <div className="logo">Pathfinder</div>
       <ul className="navbar-nav">
         <Selector></Selector>
         <Navitem
