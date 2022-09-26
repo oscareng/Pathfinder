@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setActiveMenu } from "../redux/navBarReducer";
-import { useSelector } from "react-redux";
 
 const DropdownItem = (props) => {
   const dispatch = useDispatch();
   const dropDownFunction = props.dropDownFunction;
-  const open = useSelector((state) => state.menu.SettingsMenuStatus);
 
   return (
     <a

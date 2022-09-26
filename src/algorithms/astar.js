@@ -48,44 +48,6 @@ function calculateManhattanDistance(currentNode, endNode) {
   return Math.abs(currentRow - endRow) + Math.abs(currentCol - endCol);
 }
 
-// function getNeighboringNodes(node, nodes) {
-//   const neighbors = [];
-
-//   const numRows = nodes.length;
-//   const numCols = nodes[0].length;
-//   const row = node.row;
-//   const col = node.col;
-
-//   if (row < numRows - 1) {
-//     neighbors.push(nodes[row + 1][col]);
-//   }
-//   if (row < nodes.length - 1 && row % 2 === 1 && col < numCols - 1) {
-//     nodes[row + 1][col + 1].diagonal = true;
-//     neighbors.push(nodes[row + 1][col + 1]);
-//   }
-//   if (row < nodes.length - 1 && row % 2 === 0 && col > 0) {
-//     nodes[row + 1][col - 1].diagonal = true;
-//     neighbors.push(nodes[row + 1][col - 1]);
-//   }
-//   if (row > 0) {
-//     neighbors.push(nodes[row - 1][col]);
-//   }
-//   if (row > 0 && row % 2 === 1 && col < numCols - 1) {
-//     nodes[row - 1][col + 1].diagonal = true;
-//     neighbors.push(nodes[row - 1][col + 1]);
-//   }
-//   if (row > 0 && row % 2 === 1 && col < numCols - 1) {
-//     nodes[row - 1][col + 1].diagonal = true;
-//     neighbors.push(nodes[row - 1][col + 1]);
-//   }
-//   if (col < numCols - 1) {
-//     neighbors.push(nodes[row][col + 1]);
-//   }
-//   if (col > 0) {
-//     neighbors.push(nodes[row][col - 1]);
-//   }
-//   return neighbors;
-// }
 function getNeighboringNodes(node, grid) {
   const neighbors = [];
   const { col, row } = node;

@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { setGrid, setStartOrFinish } from "../gridReducer";
 import { setAlgorithim, setMaze } from "../navBarReducer";
+import { useSelector } from "react-redux";
 export default function useVisualizeGraph() {
   const dispatch = useDispatch();
+  const hex = useSelector((state) => state.menu.hex);
 
   function getNewGridWithWallToggled(grid, row, col) {
     const newGrid = grid.slice();
@@ -96,5 +98,6 @@ export default function useVisualizeGraph() {
     getNewGridWithNewStartOrFinishChanged,
     clearBoard,
     getNewGridWithAllWallsToggled,
+    hex,
   };
 }

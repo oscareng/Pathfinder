@@ -107,6 +107,13 @@ function DropdownMenu(props) {
             <DropdownItem goToMenu="main" maze="DFS" dropDownFunction={setMaze}>
               Randomized DFS Maze
             </DropdownItem>
+            <DropdownItem
+              goToMenu="main"
+              maze="prim"
+              dropDownFunction={setMaze}
+            >
+              Randomized Prim Maze
+            </DropdownItem>
           </div>
         </CSSTransition>
       </div>

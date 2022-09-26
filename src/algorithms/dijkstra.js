@@ -77,12 +77,3 @@ function getAllNodes(grid) {
 
   return nodes;
 }
-
-// Backtracks from the finishNode to find the shortest path.
-// Only works when called *after* the dijkstra method above.
-
-//first we take the starting node and set the distance to zero. then we grab the grid and sort the nodes by distance. Because we set the starting node to zero, it will be at the beginning. We unshift that starting node from the graph and get the up right left down neighbors. We then update all those distances + 1 and set the previous node. Diagonal nodes will have a previous of either one of the adjacent nodes because the distance is the same. All that matters is which one is in the queue first. a map of distances will be created until the finish node is found. Once the finish node is found, an array of visited nodes in order (due to closest nodes being searched first) will be returned. Visited nodes are visualized and the shortest path is found by backtracking from the finish node to the starting node through currendNode.previousnode
-//the shortest path is able to be found because whenever you are setting node.previous node, you are only searching for the next node a distance of 1 square away.
-//question how does the sort algorithim determine which goes first when all of the distances are the same
-
-//whenever we take a diagonal we want to make the previous node attribute point to the diagonal

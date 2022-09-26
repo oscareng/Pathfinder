@@ -6,12 +6,15 @@ import { setGrid, setStartOrFinish } from "../gridReducer";
 import { useSelector } from "react-redux";
 import { recursiveBackTrackerMaze } from "../../../algorithms/MazeAlgorithms/recursive-backtracker";
 import useVisualizeGraph from "./useGraph";
+import { randomizedPrim } from "../../../algorithms/MazeAlgorithms/randomized-prim";
 
 export default function useVisualizeAlgo() {
-  const { getNewGridWithAllWallsToggled, clearBoard } = useVisualizeGraph();
+  const { getNewGridWithAllWallsToggled } = useVisualizeGraph();
   const pathKey = useSelector((state) => state.menu.algo);
   const mazeKey = useSelector((state) => state.menu.maze);
   const nodes = useSelector((state) => state.grid.grid);
+  const startNode = useSelector((state) => state.grid.start);
+  const endNode = useSelector((state) => state.grid.finish);
 
   const dispatch = useDispatch();
 
@@ -126,11 +129,10 @@ export default function useVisualizeAlgo() {
     const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = breadthFirstSearch(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   function visualizeRecursiveDFSMaze() {
-    //nodes is locked in once called? would have to reset with a function that returns a new graph ?
     const grid = getNewGridWithAllWallsToggled(nodes);
     const startNode = grid[startRow][startCol];
     const finishNode = grid[endRow][endCol];
@@ -139,7 +141,14 @@ export default function useVisualizeAlgo() {
     return timeToAnimate;
   }
 
-  function visualizePrim() {}
+  function visualizePrim() {
+    const grid = getNewGridWithAllWallsToggled(nodes);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
+    const newGrid = randomizedPrim(grid, startNode, finishNode);
+    const timeToAnimate = animateMaze(newGrid);
+    return timeToAnimate;
+  }
 
   function sortAlgorithms() {
     const pathfindingAlgo =
@@ -171,26 +180,6 @@ export default function useVisualizeAlgo() {
     }
   }
 
-  function resetStartAndFinish() {
-    const grid = nodes;
-
-    const startNode = document.getElementById(`node-${startRow}-${startCol}`);
-    const finishNode = document.getElementById(`node-${endRow}-${endCol}`);
-
-    startNode.classList.remove("node-start");
-    finishNode.classList.remove("node-finish");
-
-    dispatch(setGrid());
-    dispatch(setStartOrFinish(9, 10, "start"));
-    dispatch(setStartOrFinish(9, 28, "finish"));
-
-    const start = document.getElementById("node-9-10");
-    const finish = document.getElementById("node-9-28");
-
-    start.classList.add("node-start");
-    finish.classList.add("node-finish");
-  }
-
   return {
     animateShortestPath,
     getNodesInShortestPathOrder,
@@ -200,5 +189,8 @@ export default function useVisualizeAlgo() {
     visualizeBreadthFirstSearch,
     sortAlgorithms,
     visualizeRecursiveDFSMaze,
+    nodes,
+    startNode,
+    endNode,
   };
 }

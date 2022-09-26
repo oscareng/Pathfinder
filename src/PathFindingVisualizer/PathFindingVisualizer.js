@@ -10,17 +10,13 @@ import useVisualizeGraph from "./redux/hooks/useGraph.js";
 const PathFindingVisualizer = () => {
   const dispatch = useDispatch();
 
-  const hex = useSelector((state) => state.menu.hex);
-  const nodes = useSelector((state) => state.grid.grid);
-  const startNode = useSelector((state) => state.grid.start);
-  const endNode = useSelector((state) => state.grid.finish);
-
-  const { sortAlgorithms } = useVisualizeAlgo();
+  const { sortAlgorithms, nodes, startNode, endNode } = useVisualizeAlgo();
 
   const {
     getNewGridWithWallToggled,
     getNewGridWithWeightToggled,
     getNewGridWithNewStartOrFinishChanged,
+    hex,
   } = useVisualizeGraph();
 
   const [click, setClick] = useState(false);
@@ -76,7 +72,7 @@ const PathFindingVisualizer = () => {
   }
 
   return nodes !== undefined ? (
-    <>
+    <div className="wrapper">
       <Navbar className="navbar" sortAlgorithms={sortAlgorithms}></Navbar>
       <div className="main">
         <div className="background-logo">PATHFINDER</div>
@@ -118,7 +114,7 @@ const PathFindingVisualizer = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <div className="loading">loading</div>
   );

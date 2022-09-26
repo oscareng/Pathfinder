@@ -24,15 +24,6 @@
   z-index: 0.5;
 }
 
-/* .node {
-  width: 20px;
-  height: 20px;
-  outline: 1px solid grey;
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-} */
 .node-finish {
   background-color: rgba(255, 0, 0, 0.8);
 }
