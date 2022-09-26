@@ -72,6 +72,11 @@ export const setStartOrFinish = (row, col, hex) => (dispatch) => {
   }
 };
 
+export const resetStartAndFinish = (grid) => (dispatch) => {
+  dispatch(setStart({ row: 9, col: 10 }));
+  dispatch(setFinish({ row: 9, col: 28 }));
+};
+
 export const resetGrid = () => (dispatch) => {
   const grid = createGridHelper();
   dispatch(_createGrid(grid));

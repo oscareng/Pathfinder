@@ -28,16 +28,14 @@ const Node = ({
 
   return (
     <div className="node-container">
-      <div className="node-container-transparent">
-        <div
-          id={`node-${row}-${col}`}
-          className={`node ${extraClassName}`}
-          onMouseDown={() => onMouseDown(row, col)}
-          onMouseEnter={() => onMouseEnter(row, col)}
-          onMouseUp={() => onMouseUp()}
-        >
-          {/* {nodes[row][col].distance === Infinity ? "" : nodes[row][col].distance} */}
-        </div>
+      <div
+        id={`node-${row}-${col}`}
+        className={`node ${extraClassName}`}
+        onMouseDown={() => onMouseDown(row, col)}
+        onMouseEnter={() => onMouseEnter(row, col)}
+        onMouseUp={() => onMouseUp()}
+      >
+        {/* {nodes[row][col].distance === Infinity ? "" : nodes[row][col].distance} */}
       </div>
     </div>
   );

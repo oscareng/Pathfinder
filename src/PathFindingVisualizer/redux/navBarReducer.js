@@ -3,6 +3,7 @@ const TOGGLE_ACTIVE_MENU = "TOGGLE_ACTIVE_MENU";
 const TOGGLE_SELECTOR_MENU = "TOGGLE_SELECTOR_MENU";
 const TOGGLE_ALGO = "TOGGLE_ALGO";
 const SET_HEX = "SET_HEX";
+const TOGGLE_MAZE = "TOGGLE_MAZE";
 
 const initialState = {
   ActiveSettingsMenu: "main",
@@ -10,6 +11,7 @@ const initialState = {
   SettingsMenuStatus: false,
   algo: null,
   hex: "wall",
+  maze: null,
 };
 
 const _setHex = (hex) => ({
@@ -46,6 +48,7 @@ const _toggleSelectorMenu = (boolean) => ({
 export const toggleSelectorMenu = (boolean) => (dispatch) => {
   dispatch(_toggleSelectorMenu(boolean));
 };
+
 const _setAlgorithim = (key) => ({
   type: TOGGLE_ALGO,
   algo: key,
@@ -58,8 +61,27 @@ export const setAlgorithim = (key) => (dispatch) => {
     dispatch(_setAlgorithim(key));
   } else if (key === "breadthFirstSearch") {
     dispatch(_setAlgorithim(key));
+  } else if (key === "none") {
+    dispatch(_setAlgorithim(key));
   } else {
     console.log(`setAlgo thunk error!`);
+  }
+};
+
+const _setMaze = (key) => ({
+  type: TOGGLE_MAZE,
+  maze: key,
+});
+
+export const setMaze = (key) => (dispatch) => {
+  if (key === "DFS") {
+    dispatch(_setMaze(key));
+  } else if (key === "prim") {
+    dispatch(_setMaze(key));
+  } else if (key === "none") {
+    dispatch(_setMaze(key));
+  } else {
+    console.log(`setMaze thunk error`);
   }
 };
 
@@ -73,6 +95,8 @@ export default function navBarReducer(state = initialState, action) {
       return { ...state, SelectorMenuStatus: action.SelectorMenuStatus };
     case TOGGLE_ALGO:
       return { ...state, algo: action.algo };
+    case TOGGLE_MAZE:
+      return { ...state, maze: action.maze };
     case SET_HEX:
       return { ...state, hex: action.hex };
     default:

@@ -23,5 +23,6 @@ code {
   --s: 30px;
   --m: 1.5px;
   --f: calc(var(--s) * 1.299999 + 4 * var(--m));
+  --dropdown-size: 200px;
 }
 /*17.316 -- 2* overlap*/

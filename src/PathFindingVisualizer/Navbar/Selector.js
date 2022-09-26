@@ -1,6 +1,5 @@
 import React from "react";
 import "./Navbar.css";
-import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleMenu,
@@ -39,7 +38,7 @@ const Selector = (props) => {
           {activeHex === "wall" ? (
             <NodeIcon extraClassName="node-wall-icon" />
           ) : activeHex === "weight" ? (
-            <DensitySmallIcon className="selector-icon" />
+            <NodeIcon extraClassName="node-weight" />
           ) : activeHex === "start" ? (
             <NodeIcon extraClassName="node-start" />
           ) : activeHex === "finish" ? (
@@ -54,7 +53,7 @@ const Selector = (props) => {
           wallIcon={<NodeIcon extraClassName="node-wall-icon" />}
           startIcon={<NodeIcon extraClassName="node-start" />}
           finishIcon={<NodeIcon extraClassName="node-finish" />}
-          weightIcon={<DensitySmallIcon />}
+          weightIcon={<NodeIcon extraClassName="node-weight" />}
           menuType="selector"
         />
       ) : (

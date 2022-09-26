@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setGrid, setStartOrFinish } from "../gridReducer";
+import { setAlgorithim, setMaze } from "../navBarReducer";
 export default function useVisualizeGraph() {
   const dispatch = useDispatch();
 
@@ -24,8 +25,7 @@ export default function useVisualizeGraph() {
     for (let i = 0; i < newGrid.length; i++) {
       for (let j = 0; j < newGrid[i].length; j++) {
         let node = newGrid[i][j];
-        if (node.isStart || node.isFinish) continue;
-        node.isWall = true;
+        if (!node.isStart && !node.isFinish) node.isWall = true;
       }
     }
     return newGrid;
@@ -63,11 +63,12 @@ export default function useVisualizeGraph() {
 
   function clearBoard() {
     const matches = document.querySelectorAll(
-      "div.node-wall, div.node-shortest-path, div.node-visited, div.node-weight, div.node-start, div.node-finish"
+      "div.node-wall, div.node-shortest-path, div.node-visited, div.node-weight, div.node-start, div.node-finish div.node-visited-wall"
     );
     matches.forEach((node) => {
       node.classList.remove(
         "node-wall",
+        "node-visited-wall",
         "node-shortest-path",
         "node-visited",
         "node-weight",
@@ -79,6 +80,8 @@ export default function useVisualizeGraph() {
     dispatch(setGrid());
     dispatch(setStartOrFinish(9, 10, "start"));
     dispatch(setStartOrFinish(9, 28, "finish"));
+    dispatch(setMaze("none"));
+    dispatch(setAlgorithim("none"));
 
     const start = document.getElementById("node-9-10");
     const finish = document.getElementById("node-9-28");

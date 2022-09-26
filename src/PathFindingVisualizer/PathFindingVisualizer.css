@@ -23,6 +23,7 @@
   position: absolute;
   font-size: 275px;
   padding-bottom: 10%;
+  user-select: none;
 }
 .grid::before {
   content: "";

@@ -33,6 +33,7 @@ a {
   font-size: 40px;
   color: white;
   font-family: "pathfinder", sans-serif;
+  user-select: none;
 }
 
 .nav-item {
@@ -109,15 +110,34 @@ a {
 .icon-button-active {
   background-color: #363739;
 }
+
+.icon-left {
+  margin-right: auto;
+  justify-content: center;
+  display: flex;
+}
 .icon-right {
   margin-left: auto;
+  justify-content: center;
+  display: flex;
+}
+.svg-icon-settings {
+  transform: scale(0.65);
+  align-self: flex-end;
+  justify-content: center;
+}
+
+.svg-icon-settings2 {
+  transform: scale(0.65) rotate(180deg);
+  align-self: flex-end;
+  justify-content: center;
 }
 
 .dropdown {
   position: absolute;
   top: 118px;
-  width: 300px;
-  transform: translateX(-45%);
+  width: 200px;
+  transform: translateX(-10%);
   background-color: var(--bg);
   border: var(--border);
   border-radius: var(--border-radius);
@@ -142,6 +162,7 @@ a {
 
 .menu {
   width: 100%;
+  will-change: transform;
 }
 
 .menu-primary-enter {

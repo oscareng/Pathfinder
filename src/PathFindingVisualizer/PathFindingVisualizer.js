@@ -14,7 +14,9 @@ const PathFindingVisualizer = () => {
   const nodes = useSelector((state) => state.grid.grid);
   const startNode = useSelector((state) => state.grid.start);
   const endNode = useSelector((state) => state.grid.finish);
+
   const { sortAlgorithms } = useVisualizeAlgo();
+
   const {
     getNewGridWithWallToggled,
     getNewGridWithWeightToggled,

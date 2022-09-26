@@ -19,12 +19,15 @@ const DropdownItem = (props) => {
         } else if (props.hex) {
           dispatch(dropDownFunction(props.hex));
         } else if (props.maze) {
-          dropDownFunction();
+          dispatch(dropDownFunction(props.maze));
         }
       }}
     >
       {props.leftIcon ? (
-        <span onClick={() => dispatch(setActiveMenu(props.goToMenu))}>
+        <span
+          className="icon-left"
+          onClick={() => dispatch(setActiveMenu(props.goToMenu))}
+        >
           {props.leftIcon}
         </span>
       ) : (

@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { CSSTransition } from "react-transition-group";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DropdownItem from "./DropDownItem.js";
-import { setAlgorithim, setHex } from "../redux/navBarReducer";
-import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
+import { setAlgorithim, setHex, setMaze } from "../redux/navBarReducer";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 function DropdownMenu(props) {
   const activeMenu = useSelector((state) => state.menu.ActiveSettingsMenu);
   const [menuHeight, setMenuHeight] = useState(null);
+
   const dropdownRef = useRef(null);
-  const { visualizeRecursiveDFSMaze } = useVisualizeAlgo();
+
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
   }, []);
@@ -35,10 +36,16 @@ function DropdownMenu(props) {
           onEnter={calcHeight}
         >
           <div className="menu">
-            <DropdownItem rightIcon=">" goToMenu="algorithms">
+            <DropdownItem
+              rightIcon={<ArrowForwardIosIcon className="svg-icon-settings" />}
+              goToMenu="algorithms"
+            >
               Pathfinding Algorithm
             </DropdownItem>
-            <DropdownItem rightIcon=">" goToMenu="mazes">
+            <DropdownItem
+              rightIcon={<ArrowForwardIosIcon className="svg-icon-settings" />}
+              goToMenu="mazes"
+            >
               Maze Generator
             </DropdownItem>
           </div>
@@ -52,7 +59,10 @@ function DropdownMenu(props) {
           onEnter={calcHeight}
         >
           <div className="menu">
-            <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
+            <DropdownItem
+              goToMenu="main"
+              leftIcon={<ArrowForwardIosIcon className="svg-icon-settings2" />}
+            >
               {" "}
               Algorithms & Mazes
             </DropdownItem>
@@ -87,14 +97,14 @@ function DropdownMenu(props) {
           onEnter={calcHeight}
         >
           <div>
-            <DropdownItem goToMenu="main" leftIcon={<ArrowBackIcon />}>
+            <DropdownItem
+              goToMenu="main"
+              leftIcon={<ArrowForwardIosIcon className="svg-icon-settings2" />}
+            >
               {" "}
               Algorithms & Mazes
             </DropdownItem>
-            <DropdownItem
-              maze="recursiveDFS"
-              dropDownFunction={visualizeRecursiveDFSMaze}
-            >
+            <DropdownItem goToMenu="main" maze="DFS" dropDownFunction={setMaze}>
               Randomized DFS Maze
             </DropdownItem>
           </div>
