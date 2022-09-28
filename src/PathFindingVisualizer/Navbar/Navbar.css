@@ -47,6 +47,13 @@ a {
 
 .logo-node-top {
   align-self: center;
+  background-color: rgba(255, 234, 0, 0.774);
+}
+.logo-node-left {
+  background-color: rgba(17, 120, 217, 0.75);
+}
+.logo-node-right {
+  background-color: #5fc8d4;
 }
 
 .logo-top {

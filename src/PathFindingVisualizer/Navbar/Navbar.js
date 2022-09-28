@@ -21,8 +21,8 @@ const Navbar = (props) => {
           <NodeIcon extraClassName="logo-node logo-node-top" />
 
           <div className="logo-nodes-bottom">
-            <NodeIcon extraClassName="logo-node" />
-            <NodeIcon extraClassName="logo-node" />
+            <NodeIcon extraClassName="logo-node logo-node-left" />
+            <NodeIcon extraClassName="logo-node logo-node-right" />
           </div>
         </div>
         Pathfinder
