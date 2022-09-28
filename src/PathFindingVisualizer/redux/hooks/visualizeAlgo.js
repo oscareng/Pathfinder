@@ -7,9 +7,11 @@ import { useSelector } from "react-redux";
 import { recursiveBackTrackerMaze } from "../../../algorithms/MazeAlgorithms/recursive-backtracker";
 import useVisualizeGraph from "./useGraph";
 import { randomizedPrim } from "../../../algorithms/MazeAlgorithms/randomized-prim";
+import { setAnimationActive } from "../navBarReducer";
 
 export default function useVisualizeAlgo() {
-  const { getNewGridWithAllWallsToggled } = useVisualizeGraph();
+  const { getNewGridWithAllWallsToggled, clearBoard, createGridHelper } =
+    useVisualizeGraph();
   const pathKey = useSelector((state) => state.menu.algo);
   const mazeKey = useSelector((state) => state.menu.maze);
   const nodes = useSelector((state) => state.grid.grid);
@@ -35,29 +37,31 @@ export default function useVisualizeAlgo() {
     return nodesInShortestPathOrder;
   }
 
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-visited";
-      }, 10 * i);
-    }
-  }
+  // function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  //   for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+  //     if (i === visitedNodesInOrder.length) {
+  //       setTimeout(() => {
+  //         animateShortestPath(nodesInShortestPathOrder);
+  //       }, 10 * i);
+  //       return;
+  //     }
+  //     setTimeout(() => {
+  //       const node = visitedNodesInOrder[i];
+  //       document.getElementById(`node-${node.row}-${node.col}`).className =
+  //         "node node-visited";
+  //     }, 25 * i);
+  //   }
+  // }
 
   function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
+    const timeToAnimate =
+      visitedNodesInOrder.length * 50 + nodesInShortestPathOrder.length * 50;
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           animateShortestPath(nodesInShortestPathOrder);
         }, 50 * i);
-        return;
+        return timeToAnimate;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
@@ -83,16 +87,17 @@ export default function useVisualizeAlgo() {
         let wall = walls[x];
         document.getElementById(`node-${wall.row}-${wall.col}`).className =
           "node node-visited-wall node-wall";
-      }, 5 * x);
+      }, 15 * x);
     }
 
-    const timeToAnimate = walls.length * 5;
+    const timeToAnimate = walls.length * 15;
 
     setTimeout(() => {
       dispatch(setGrid(newGrid));
-    }, timeToAnimate + 400);
+      dispatch(setAnimationActive(false));
+    }, timeToAnimate + 500);
 
-    return timeToAnimate + 400;
+    return timeToAnimate + 500;
   }
 
   function animateShortestPath(nodesInShortestPathOrder) {
@@ -111,7 +116,11 @@ export default function useVisualizeAlgo() {
     const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    const timeToAnimate = animateAlgorithm(
+      visitedNodesInOrder,
+      nodesInShortestPathOrder
+    );
+    return timeToAnimate;
   }
 
   function visualizeAStar() {
@@ -120,7 +129,11 @@ export default function useVisualizeAlgo() {
     const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = aStar(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    const timeToAnimate = animateAlgorithm(
+      visitedNodesInOrder,
+      nodesInShortestPathOrder
+    );
+    return timeToAnimate;
   }
 
   function visualizeBreadthFirstSearch() {
@@ -129,24 +142,10 @@ export default function useVisualizeAlgo() {
     const finishNode = grid[endRow][endCol];
     const visitedNodesInOrder = breadthFirstSearch(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
-  }
-
-  function visualizeRecursiveDFSMaze() {
-    const grid = getNewGridWithAllWallsToggled(nodes);
-    const startNode = grid[startRow][startCol];
-    const finishNode = grid[endRow][endCol];
-    const newGrid = recursiveBackTrackerMaze(grid, startNode, finishNode);
-    const timeToAnimate = animateMaze(newGrid);
-    return timeToAnimate;
-  }
-
-  function visualizePrim() {
-    const grid = getNewGridWithAllWallsToggled(nodes);
-    const startNode = grid[startRow][startCol];
-    const finishNode = grid[endRow][endCol];
-    const newGrid = randomizedPrim(grid, startNode, finishNode);
-    const timeToAnimate = animateMaze(newGrid);
+    const timeToAnimate = animateAlgorithm(
+      visitedNodesInOrder,
+      nodesInShortestPathOrder
+    );
     return timeToAnimate;
   }
 
@@ -160,24 +159,39 @@ export default function useVisualizeAlgo() {
         ? visualizeBreadthFirstSearch()
         : "none";
 
-    const mazeAlgo =
-      mazeKey === "DFS"
-        ? visualizeRecursiveDFSMaze
-        : mazeKey === "prim"
-        ? visualizePrim
-        : "none";
-
-    if (mazeAlgo !== "none") {
-      const timeToAnimate = mazeAlgo();
-
+    if (pathfindingAlgo !== "none") {
+      dispatch(setAnimationActive(true));
+      const timeToAnimate = pathfindingAlgo();
       setTimeout(() => {
-        pathfindingAlgo();
-      }, timeToAnimate + 300);
-    } else if (mazeAlgo === "none" && pathfindingAlgo !== "none") {
-      pathfindingAlgo();
+        dispatch(setAnimationActive(false));
+      }, timeToAnimate + 500);
     } else {
       console.log("set an algorithm to begin!");
     }
+  }
+
+  function visualizeRecursiveDFSMaze() {
+    clearBoard();
+    dispatch(setAnimationActive(true));
+    const resetGrid = createGridHelper();
+    const grid = getNewGridWithAllWallsToggled(resetGrid);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
+    const newGrid = recursiveBackTrackerMaze(grid, startNode, finishNode);
+    const timeToAnimate = animateMaze(newGrid);
+    return timeToAnimate;
+  }
+
+  function visualizePrim() {
+    clearBoard();
+    dispatch(setAnimationActive(true));
+    const resetGrid = createGridHelper();
+    const grid = getNewGridWithAllWallsToggled(resetGrid);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[endRow][endCol];
+    const newGrid = randomizedPrim(grid, startNode, finishNode);
+    const timeToAnimate = animateMaze(newGrid);
+    return timeToAnimate;
   }
 
   return {
@@ -189,6 +203,7 @@ export default function useVisualizeAlgo() {
     visualizeBreadthFirstSearch,
     sortAlgorithms,
     visualizeRecursiveDFSMaze,
+    visualizePrim,
     nodes,
     startNode,
     endNode,

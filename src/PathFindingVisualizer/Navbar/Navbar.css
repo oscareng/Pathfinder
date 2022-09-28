@@ -18,14 +18,38 @@ a {
   justify-content: space-between;
   align-items: center;
   height: var(--nav-size);
-  padding: 0 2rem;
   background-color: var(--bg);
   border-bottom: var(--border);
 }
 
 .navbar-nav {
+  padding: 0 1rem;
   display: flex;
   justify-self: flex-end;
+}
+
+.logo-nodes {
+  flex-direction: column;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  padding: 0 1rem;
+  width: calc(var(--s) * 2);
+  height: calc(var(--s) * 2);
+  margin-top: 5px;
+}
+
+.logo-nodes-bottom {
+  display: flex;
+  align-self: flex-end;
+  height: var(--s);
+}
+
+.logo-node-top {
+  align-self: center;
+}
+
+.logo-top {
 }
 .logo {
   display: flex;
@@ -34,8 +58,21 @@ a {
   color: white;
   font-family: "pathfinder", sans-serif;
   user-select: none;
+  align-items: center;
 }
-
+.help-button {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  padding: 0 1rem;
+  color: #484a4d;
+}
+.help-button:hover {
+  color: #3f4043;
+}
+.help-button:active {
+  color: #363739;
+}
 .nav-item {
   width: calc(var(--nav-size) * 0.75);
   display: flex;
@@ -77,14 +114,7 @@ a {
   margin-left: auto;
   padding: 20px;
 }
-.selector-icon {
-  outline: solid;
-  outline-width: 2.5px;
-  outline-offset: 7px;
-  border-radius: 2.5px;
-  color: #6182f7;
-  outline-color: var(--bg);
-}
+
 .icon-button {
   --button-size: calc(var(--nav-size) * 0.45);
   width: var(--button-size);
@@ -96,6 +126,10 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.icon-button-highlight {
+  background-color: red;
+  color: red;
 }
 .icon-button-active {
   color: #6182f7;

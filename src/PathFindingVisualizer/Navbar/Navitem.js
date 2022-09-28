@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Navbar.css";
 import { toggleMenu, toggleSelectorMenu } from "../redux/navBarReducer";
@@ -8,7 +8,7 @@ function Navitem(props) {
   const openSettings = useSelector((state) => state.menu.SettingsMenuStatus);
   const dispatch = useDispatch();
   const btnFunction = props.function;
-
+  const animationActive = useSelector((state) => state.menu.animation);
   let extraClassName = openSettings ? "icon-button-active" : "";
 
   if (props.dropdown === true) {
@@ -16,10 +16,12 @@ function Navitem(props) {
       <li className="nav-item">
         <a
           href="#"
-          className={`icon-button ${extraClassName}`}
+          className={`icon-button ${extraClassName} `}
           onClick={() => {
-            dispatch(toggleMenu(!openSettings));
-            dispatch(toggleSelectorMenu(false));
+            if (!animationActive) {
+              dispatch(toggleMenu(!openSettings));
+              dispatch(toggleSelectorMenu(false));
+            }
           }}
         >
           {props.icon}
@@ -32,9 +34,9 @@ function Navitem(props) {
     <li className="nav-item">
       <a
         href="#"
-        className="icon-button"
+        className={`icon-button `}
         onClick={() => {
-          btnFunction();
+          !animationActive && btnFunction();
         }}
       >
         {props.icon}

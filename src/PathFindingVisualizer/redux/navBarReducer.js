@@ -4,14 +4,16 @@ const TOGGLE_SELECTOR_MENU = "TOGGLE_SELECTOR_MENU";
 const TOGGLE_ALGO = "TOGGLE_ALGO";
 const SET_HEX = "SET_HEX";
 const TOGGLE_MAZE = "TOGGLE_MAZE";
+const ANIMATION_ACTIVE = "ANIMATION_ACTIVE";
 
 const initialState = {
   ActiveSettingsMenu: "main",
   SelectorMenuStatus: false,
   SettingsMenuStatus: false,
-  algo: null,
+  algo: "none",
   hex: "wall",
-  maze: null,
+  maze: "none",
+  animation: false,
 };
 
 const _setHex = (hex) => ({
@@ -85,6 +87,15 @@ export const setMaze = (key) => (dispatch) => {
   }
 };
 
+const _animationActive = (key) => ({
+  type: ANIMATION_ACTIVE,
+  animation: key,
+});
+
+export const setAnimationActive = (boolean) => (dispatch) => {
+  dispatch(_animationActive(boolean));
+};
+
 export default function navBarReducer(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_SETTINGS_MENU:
@@ -99,6 +110,8 @@ export default function navBarReducer(state = initialState, action) {
       return { ...state, maze: action.maze };
     case SET_HEX:
       return { ...state, hex: action.hex };
+    case ANIMATION_ACTIVE:
+      return { ...state, animation: action.animation };
     default:
       return state;
   }

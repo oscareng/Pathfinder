@@ -6,10 +6,11 @@ import "./PathFindingVisualizer.css";
 import Navbar from "./Navbar/Navbar.js";
 import useVisualizeAlgo from "./redux/hooks/visualizeAlgo.js";
 import useVisualizeGraph from "./redux/hooks/useGraph.js";
+import { useSelect } from "@mui/base";
 
 const PathFindingVisualizer = () => {
   const dispatch = useDispatch();
-
+  const activeAnimation = useSelector((state) => state.menu.animation);
   const { sortAlgorithms, nodes, startNode, endNode } = useVisualizeAlgo();
 
   const {
@@ -72,7 +73,7 @@ const PathFindingVisualizer = () => {
   }
 
   return nodes !== undefined ? (
-    <div className="wrapper">
+    <>
       <Navbar className="navbar" sortAlgorithms={sortAlgorithms}></Navbar>
       <div className="main">
         <div className="background-logo">PATHFINDER</div>
@@ -103,9 +104,13 @@ const PathFindingVisualizer = () => {
                       isStart={isStart}
                       isFinish={isFinish}
                       isWall={isWall}
-                      onMouseDown={(row, col) => handleMouseDown(row, col)}
+                      onMouseDown={(row, col) =>
+                        !activeAnimation && handleMouseDown(row, col)
+                      }
                       onMouseUp={handleMouseUp}
-                      onMouseEnter={(row, col) => handleMouseEnter(row, col)}
+                      onMouseEnter={(row, col) =>
+                        !activeAnimation && handleMouseEnter(row, col)
+                      }
                     ></Node>
                   );
                 })}
@@ -114,7 +119,7 @@ const PathFindingVisualizer = () => {
           })}
         </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className="loading">loading</div>
   );

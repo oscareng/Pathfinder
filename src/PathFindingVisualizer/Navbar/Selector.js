@@ -7,20 +7,11 @@ import {
   setActiveMenu,
 } from "../redux/navBarReducer";
 import DropdownMenu from "./DropdownMenu";
-
+import NodeIcon from "./NodeIcon";
 const Selector = (props) => {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.menu.SelectorMenuStatus);
-  let activeHex = useSelector((state) => state.menu.hex);
-
-  function NodeIcon(props) {
-    let extraClassName = props.extraClassName;
-    return (
-      <div className="node-container">
-        <div className={`selector-icon node ${extraClassName}`}></div>
-      </div>
-    );
-  }
+  const activeHex = useSelector((state) => state.menu.hex);
 
   return (
     <li className="nav-selector">
@@ -38,11 +29,11 @@ const Selector = (props) => {
           {activeHex === "wall" ? (
             <NodeIcon extraClassName="node-wall-icon" />
           ) : activeHex === "weight" ? (
-            <NodeIcon extraClassName="node-weight" />
+            <NodeIcon extraClassName="node-weight-icon" />
           ) : activeHex === "start" ? (
-            <NodeIcon extraClassName="node-start" />
+            <NodeIcon extraClassName="node-start-icon" />
           ) : activeHex === "finish" ? (
-            <NodeIcon extraClassName="node-finish" />
+            <NodeIcon extraClassName="node-finish-icon" />
           ) : (
             ""
           )}
@@ -51,9 +42,9 @@ const Selector = (props) => {
       {open ? (
         <DropdownMenu
           wallIcon={<NodeIcon extraClassName="node-wall-icon" />}
-          startIcon={<NodeIcon extraClassName="node-start" />}
-          finishIcon={<NodeIcon extraClassName="node-finish" />}
-          weightIcon={<NodeIcon extraClassName="node-weight" />}
+          startIcon={<NodeIcon extraClassName="node-start-icon" />}
+          finishIcon={<NodeIcon extraClassName="node-finish-icon" />}
+          weightIcon={<NodeIcon extraClassName="node-weight-icon" />}
           menuType="selector"
         />
       ) : (

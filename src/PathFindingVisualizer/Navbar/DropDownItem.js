@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setActiveMenu } from "../redux/navBarReducer";
+import { toggleMenu } from "../redux/navBarReducer";
 
 const DropdownItem = (props) => {
   const dispatch = useDispatch();
@@ -13,11 +14,13 @@ const DropdownItem = (props) => {
       onClick={() => {
         props.goToMenu && dispatch(setActiveMenu(props.goToMenu));
         if (props.algo) {
+          dispatch(toggleMenu(false));
           dispatch(dropDownFunction(props.algo));
         } else if (props.hex) {
+          dispatch(toggleMenu(false));
           dispatch(dropDownFunction(props.hex));
         } else if (props.maze) {
-          dispatch(dropDownFunction(props.maze));
+          dropDownFunction();
         }
       }}
     >

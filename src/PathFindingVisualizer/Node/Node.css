@@ -1,6 +1,6 @@
 .node-container {
   position: relative;
-  background: linear-gradient(0deg, #dd13dd80 0%, #5fc8d47c 100%);
+  background: linear-gradient(0deg, #dd13dd80 10%, #5fc8d47c 80%);
   width: var(--s);
   height: var(--s);
   display: inline-block;
@@ -25,20 +25,28 @@
 }
 
 .node-finish {
-  background-color: rgba(255, 0, 0, 0.8);
+  background: rgba(255, 0, 0, 0.8);
 }
 .node-wall {
-  background-color: rgb(12, 53, 71);
+  background: rgb(12, 53, 71);
 }
 .node-start {
-  background-color: rgba(0, 128, 0, 0.8);
-}
-
-.node-wall-icon {
-  background-color: rgb(12, 53, 71);
+  background: rgba(0, 128, 0, 0.8);
 }
 .node-weight {
-  background-color: rgb(122, 122, 122);
+  background: rgb(122, 122, 122);
+}
+.node-finish-icon {
+  background: rgba(255, 0, 0, 0.8);
+}
+.node-start-icon {
+  background: rgba(0, 128, 0, 0.8);
+}
+.node-wall-icon {
+  background: rgb(12, 53, 71);
+}
+.node-weight-icon {
+  background: rgb(122, 122, 122);
 }
 .node-visited {
   animation-name: visitedAnimation;

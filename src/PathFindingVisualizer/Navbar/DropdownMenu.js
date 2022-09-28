@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import "./Navbar.css";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
 import DropdownItem from "./DropDownItem.js";
 import { setAlgorithim, setHex, setMaze } from "../redux/navBarReducer";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
+import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
+import useVisualizeGraph from "../redux/hooks/useGraph";
+import { toggleMenu } from "../redux/navBarReducer";
 function DropdownMenu(props) {
+  const dispatch = useDispatch();
   const activeMenu = useSelector((state) => state.menu.ActiveSettingsMenu);
   const [menuHeight, setMenuHeight] = useState(null);
-
+  const { visualizePrim, visualizeRecursiveDFSMaze } = useVisualizeAlgo();
+  const { clearBoard } = useVisualizeGraph();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -38,15 +43,15 @@ function DropdownMenu(props) {
           <div className="menu">
             <DropdownItem
               rightIcon={<ArrowForwardIosIcon className="svg-icon-settings" />}
-              goToMenu="algorithms"
-            >
-              Pathfinding Algorithm
-            </DropdownItem>
-            <DropdownItem
-              rightIcon={<ArrowForwardIosIcon className="svg-icon-settings" />}
               goToMenu="mazes"
             >
               Maze Generator
+            </DropdownItem>
+            <DropdownItem
+              rightIcon={<ArrowForwardIosIcon className="svg-icon-settings" />}
+              goToMenu="algorithms"
+            >
+              Pathfinding Algorithm
             </DropdownItem>
           </div>
         </CSSTransition>
@@ -104,13 +109,23 @@ function DropdownMenu(props) {
               {" "}
               Algorithms & Mazes
             </DropdownItem>
-            <DropdownItem goToMenu="main" maze="DFS" dropDownFunction={setMaze}>
+            <DropdownItem
+              goToMenu="main"
+              maze="DFS"
+              dropDownFunction={() => {
+                dispatch(toggleMenu(false));
+                visualizeRecursiveDFSMaze();
+              }}
+            >
               Randomized DFS Maze
             </DropdownItem>
             <DropdownItem
               goToMenu="main"
               maze="prim"
-              dropDownFunction={setMaze}
+              dropDownFunction={() => {
+                dispatch(toggleMenu(false));
+                visualizePrim();
+              }}
             >
               Randomized Prim Maze
             </DropdownItem>

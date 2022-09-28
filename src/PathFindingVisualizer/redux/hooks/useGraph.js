@@ -51,11 +51,11 @@ export default function useVisualizeGraph() {
     let oldNode, newNode;
 
     if (hex === "start") {
-      oldNode = { ...oldPosition, isStart: false };
-      newNode = { ...newPosition, isStart: true };
+      oldNode = { ...oldPosition, isStart: false, isWall: false };
+      newNode = { ...newPosition, isStart: true, isWall: false };
     } else if (hex === "finish") {
-      oldNode = { ...oldPosition, isFinish: false };
-      newNode = { ...newPosition, isFinish: true };
+      oldNode = { ...oldPosition, isFinish: false, isWall: false };
+      newNode = { ...newPosition, isFinish: true, isWall: false };
     }
 
     newGrid[oldRow][oldCol] = oldNode;
@@ -92,6 +92,37 @@ export default function useVisualizeGraph() {
     finish.classList.add("node-finish");
   }
 
+  function createGridHelper() {
+    const START_NODE_ROW = 9;
+    const START_NODE_COL = 10;
+    const FINISH_NODE_ROW = 9;
+    const FINISH_NODE_COL = 28;
+    const nodes = [];
+    for (let row = 0; row <= 18; row++) {
+      const currentRow = [];
+      for (let col = 0; col <= 38; col++) {
+        const currentNode = {
+          id: `node-${row}-${col}`,
+          col,
+          row,
+          isStart: row === START_NODE_ROW && col === START_NODE_COL,
+          isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+          isWall: false,
+          isVisited: false,
+          distance: Infinity,
+          distanceFromStart: Infinity,
+          estimatedDistanceToEnd: Infinity,
+          isWeighted: false,
+          isVisitedMaze: false,
+        };
+
+        currentRow.push(currentNode);
+      }
+      nodes.push(currentRow);
+    }
+    return nodes;
+  }
+
   return {
     getNewGridWithWallToggled,
     getNewGridWithWeightToggled,
@@ -99,5 +130,6 @@ export default function useVisualizeGraph() {
     clearBoard,
     getNewGridWithAllWallsToggled,
     hex,
+    createGridHelper,
   };
 }
