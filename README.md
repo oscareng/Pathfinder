@@ -7,9 +7,13 @@ You may access the project here:
 
 Current Algorithms:
 
+*Pathfinding*
+
 A* Search: https://en.wikipedia.org/wiki/A*_search_algorithm
 
 Dijkstra's: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+
+*Maze*
 
 Prim's: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim's_algorithm
 
