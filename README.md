@@ -3,4 +3,4 @@ Welcome to Pathfinder! This application was born from my fascination with pathfi
 
 You may access the project here: 
 
-*Please use Google Chrome!
+*Please use Google Chrome*
