@@ -11,6 +11,6 @@ A* Search: https://en.wikipedia.org/wiki/A*_search_algorithm
 
 Dijkstra's: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
-Prim's:https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim's_algorithm
+Prim's: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim's_algorithm
 
 Randomized DFS: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search
