@@ -19,4 +19,4 @@ Prim's: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim'
 
 Randomized DFS: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search
 
- <font size="3"> This is my text number 3</font> 
+ <font size="8"> This is my text number 3</font> 
