@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 const START_NODE_ROW = 9;
 const START_NODE_COL = 10;
 const FINISH_NODE_ROW = 9;
@@ -31,6 +33,7 @@ function createGridHelper() {
         estimatedDistanceToEnd: Infinity,
         isWeighted: false,
         isVisitedMaze: false,
+        key: uuid(),
       };
 
       currentRow.push(currentNode);
