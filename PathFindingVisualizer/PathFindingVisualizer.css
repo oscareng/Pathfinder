@@ -1,0 +1,75 @@
+.main {
+  display: flex;
+  height: calc(100vh - var(--nav-size) - 1px);
+  justify-content: center;
+  align-items: center;
+  background-color: #d9afd9;
+  background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
+}
+
+.grid {
+  justify-self: center;
+  align-self: center;
+  font-size: 0;
+  width: calc(var(--s) * 39 + calc(var(--s) / 2 + var(--m)));
+  height: calc(var(--s) * 19);
+  z-index: 0.5;
+}
+
+.background-logo {
+  font-family: "pathfinder", sans-serif;
+  color: white;
+  opacity: 40%;
+  align-self: center;
+  justify-content: center;
+  z-index: 0;
+  position: absolute;
+  font-size: 275px;
+  padding-bottom: 10%;
+  user-select: none;
+}
+.error-message-hidden {
+  display: flex;
+  width: 250px;
+  z-index: 0;
+  position: absolute;
+  align-self: flex-start;
+  justify-content: center;
+  left: 86%;
+  bottom: 85%;
+  color: white;
+  background-color: #cc0000;
+  border-radius: 15px;
+  font-weight: 450;
+  font-size: medium;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1.5s, opacity 1.5s ease;
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1.5s ease;
+}
+.grid::before {
+  content: "";
+  width: calc(var(--s) / 2 + var(--m));
+  float: left;
+  height: 100%;
+  shape-outside: repeating-linear-gradient(
+    #0000 0 calc(var(--f) - 2px),
+    #000 0 var(--f)
+  );
+}
+
+@media (max-width: 1250px) {
+  .main {
+    width: 1250px;
+  }
+}
+
+@media (max-height: 650px) {
+  .main {
+    height: 650px;
+  }
+}

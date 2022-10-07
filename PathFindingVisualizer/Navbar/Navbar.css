@@ -1,0 +1,239 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+@font-face {
+  font-family: "pathfinder";
+  src: url(../../../public/Bungee-Regular.ttf);
+}
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--nav-size);
+  background-color: var(--bg);
+  border-bottom: var(--border);
+}
+
+.navbar-nav {
+  padding: 0 1rem;
+  display: flex;
+  justify-self: flex-end;
+}
+
+.logo-nodes {
+  flex-direction: column;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  padding: 0 1rem;
+  width: calc(var(--s) * 2);
+  height: calc(var(--s) * 2);
+  margin-top: 5px;
+}
+
+.logo-nodes-bottom {
+  display: flex;
+  align-self: flex-end;
+  height: var(--s);
+}
+
+.logo-node-top {
+  align-self: center;
+  background-color: rgba(255, 234, 0, 0.774);
+}
+.logo-node-left {
+  background-color: rgba(17, 120, 217, 0.75);
+}
+.logo-node-right {
+  background-color: #5fc8d4;
+}
+
+.logo {
+  display: flex;
+  justify-self: flex-start;
+  font-size: 40px;
+  color: white;
+  font-family: "pathfinder", sans-serif;
+  user-select: none;
+  align-items: center;
+}
+.help-button {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  padding: 0 1rem;
+  color: #484a4d;
+  cursor: pointer;
+}
+.help-button:hover {
+  color: #3f4043;
+}
+.help-button:active {
+  color: #363739;
+}
+.nav-item {
+  width: calc(var(--nav-size) * 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-selector {
+  width: calc(var(--nav-size) * 2.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-selector-button {
+  --button-width: calc(var(--nav-size) * 2.25);
+  --button-height: calc(var(--nav-size) * 0.45);
+  width: var(--button-width);
+  height: var(--button-height);
+  background-color: #484a4d;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-selector-button:hover {
+  background-color: #3f4043;
+}
+.nav-selector-button:active {
+  background-color: #363739;
+}
+.nav-selector-text-left {
+  padding: 15px;
+}
+.nav-selector-icon-right {
+  display: flex;
+  margin-left: auto;
+  padding: 20px;
+}
+
+.icon-button {
+  --button-size: calc(var(--nav-size) * 0.45);
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-button-highlight {
+  background-color: red;
+  color: red;
+}
+.icon-button-active {
+  color: #6182f7;
+}
+
+.icon-button:hover {
+  background-color: #3f4043;
+}
+.icon-button:active {
+  background-color: #363739;
+}
+.icon-button-active {
+  background-color: #363739;
+}
+
+.icon-left {
+  margin-right: auto;
+  justify-content: center;
+  display: flex;
+}
+.icon-right {
+  margin-left: auto;
+  justify-content: center;
+  display: flex;
+}
+.svg-icon-settings {
+  transform: scale(0.65);
+  align-self: flex-end;
+  justify-content: center;
+}
+
+.svg-icon-settings2 {
+  transform: scale(0.65) rotate(180deg);
+  align-self: flex-end;
+  justify-content: center;
+}
+
+.dropdown {
+  position: absolute;
+  top: 118px;
+  width: 200px;
+  transform: translateX(-10%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  z-index: 1;
+}
+
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5rem;
+}
+
+.menu-item:hover {
+  background-color: #525357;
+}
+
+.menu {
+  width: 100%;
+  will-change: transform;
+}
+
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-primary-exit {
+  position: absolute;
+}
+
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+.menu-algorithm-enter {
+  transform: translateX(110%);
+}
+
+.menu-algorithm-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-algorithm-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
