@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Pathfinder/static/css/main.071baa54.css",
+    "main.js": "/Pathfinder/static/js/main.8be11211.js",
+    "static/media/Bungee-Regular.ttf": "/Pathfinder/static/media/Bungee-Regular.3d95fa68283102c29cd9.ttf",
+    "static/media/mazePNG.png": "/Pathfinder/static/media/mazePNG.74f2fd7fcbcc564351ef.png",
+    "static/media/settingsIMG.png": "/Pathfinder/static/media/settingsIMG.5cee4e9a118a09b32da3.png",
+    "static/media/algorithmIMG.png": "/Pathfinder/static/media/algorithmIMG.6fa8ebfbb9f18ee637e6.png",
+    "index.html": "/Pathfinder/index.html",
+    "main.071baa54.css.map": "/Pathfinder/static/css/main.071baa54.css.map",
+    "main.8be11211.js.map": "/Pathfinder/static/js/main.8be11211.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.071baa54.css",
+    "static/js/main.8be11211.js"
+  ]
+}
