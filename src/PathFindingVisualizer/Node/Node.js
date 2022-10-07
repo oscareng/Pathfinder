@@ -10,23 +10,28 @@ const Node = ({
   onMouseDown,
   onMouseEnter,
   onMouseUp,
+  isWeight,
 }) => {
-  const extraClassName = isFinish
+  let extraClassName = isFinish
     ? "node-finish"
     : isStart
     ? "node-start"
     : isWall
     ? `node-wall`
+    : isWeight
+    ? `node-weight`
     : ``;
 
   return (
-    <div
-      id={`node-${row}-${col}`}
-      className={`node ${extraClassName}`}
-      onMouseDown={() => onMouseDown(row, col)}
-      onMouseEnter={() => onMouseEnter(row, col)}
-      onMouseUp={() => onMouseUp()}
-    ></div>
+    <div className="node-container">
+      <div
+        id={`node-${row}-${col}`}
+        className={`node ${extraClassName}`}
+        onMouseDown={() => onMouseDown(row, col)}
+        onMouseEnter={() => onMouseEnter(row, col)}
+        onMouseUp={() => onMouseUp()}
+      ></div>
+    </div>
   );
 };
 
