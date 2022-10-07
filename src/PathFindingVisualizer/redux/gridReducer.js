@@ -6,9 +6,9 @@ const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 28;
 
 const initialState = {
-  grid: [],
-  start: { row: 9, col: 10 },
-  finish: { row: 9, col: 28 },
+	grid: [],
+	start: { row: 9, col: 10 },
+	finish: { row: 9, col: 28 },
 };
 
 const CREATE_GRID = "CREATE_GRID";
@@ -36,64 +36,64 @@ function createGridHelper() {
         key: uuid(),
       };
 
-      currentRow.push(currentNode);
-    }
-    nodes.push(currentRow);
-  }
-  return nodes;
+			currentRow.push(currentNode);
+		}
+		nodes.push(currentRow);
+	}
+	return nodes;
 }
 
 const _createGrid = (grid) => ({
-  type: CREATE_GRID,
-  grid,
+	type: CREATE_GRID,
+	grid,
 });
 
 const setStart = (start) => ({
-  type: SET_START,
-  start,
+	type: SET_START,
+	start,
 });
 
 const setFinish = (finish) => ({
-  type: SET_FINISH,
-  finish,
+	type: SET_FINISH,
+	finish,
 });
 
 export const setGrid = (grid) => (dispatch) => {
-  if (!grid) {
-    const grid = createGridHelper();
-    dispatch(_createGrid(grid));
-  } else {
-    dispatch(_createGrid(grid));
-  }
+	if (!grid) {
+		const grid = createGridHelper();
+		dispatch(_createGrid(grid));
+	} else {
+		dispatch(_createGrid(grid));
+	}
 };
 
 export const setStartOrFinish = (row, col, hex) => (dispatch) => {
-  if (hex === "start") {
-    dispatch(setStart({ row, col }));
-  } else if (hex === "finish") {
-    dispatch(setFinish({ row, col }));
-  }
+	if (hex === "start") {
+		dispatch(setStart({ row, col }));
+	} else if (hex === "finish") {
+		dispatch(setFinish({ row, col }));
+	}
 };
 
 export const resetStartAndFinish = (grid) => (dispatch) => {
-  dispatch(setStart({ row: 9, col: 10 }));
-  dispatch(setFinish({ row: 9, col: 28 }));
+	dispatch(setStart({ row: 9, col: 10 }));
+	dispatch(setFinish({ row: 9, col: 28 }));
 };
 
 export const resetGrid = () => (dispatch) => {
-  const grid = createGridHelper();
-  dispatch(_createGrid(grid));
+	const grid = createGridHelper();
+	dispatch(_createGrid(grid));
 };
 
 export default function gridReducer(state = initialState, action) {
-  switch (action.type) {
-    case CREATE_GRID:
-      return { ...state, grid: action.grid };
-    case SET_START:
-      return { ...state, start: action.start };
-    case SET_FINISH:
-      return { ...state, finish: action.finish };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case CREATE_GRID:
+			return { ...state, grid: action.grid };
+		case SET_START:
+			return { ...state, start: action.start };
+		case SET_FINISH:
+			return { ...state, finish: action.finish };
+		default:
+			return state;
+	}
 }
