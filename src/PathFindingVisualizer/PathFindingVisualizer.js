@@ -4,10 +4,10 @@ import Node from "./Node/Node.js";
 import { setGrid, setStartOrFinish } from "./redux/gridReducer";
 import "./PathFindingVisualizer.css";
 import Navbar from "./Navbar/Navbar.js";
-import useVisualizeAlgo from "./redux/hooks/visualizeAlgo.js";
-import useVisualizeGraph from "./redux/hooks/useGraph.js";
-import { useSelect } from "@mui/base";
-
+import useVisualizeAlgo from "./hooks/useVisualizeAlgo.js";
+import useVisualizeGraph from "./hooks/useGraph.js";
+import Modal from "./Modal/Modal.js";
+import { toggleMenu, toggleSelectorMenu } from "./redux/navBarReducer.js";
 const PathFindingVisualizer = () => {
   const dispatch = useDispatch();
   const activeAnimation = useSelector((state) => state.menu.animation);
@@ -21,6 +21,7 @@ const PathFindingVisualizer = () => {
   } = useVisualizeGraph();
 
   const [click, setClick] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
 
   useEffect(() => {
     dispatch(setGrid());
@@ -72,10 +73,25 @@ const PathFindingVisualizer = () => {
     }
   }
 
+  function handleToggleModal(bool) {
+    setModalActive(bool);
+  }
+
   return nodes !== undefined ? (
     <>
-      <Navbar className="navbar" sortAlgorithms={sortAlgorithms}></Navbar>
-      <div className="main">
+      {modalActive ? <Modal onToggleModal={handleToggleModal} /> : ""}
+      <Navbar
+        className="navbar"
+        sortAlgorithms={sortAlgorithms}
+        onToggleModal={handleToggleModal}
+      ></Navbar>
+      <div
+        className="main"
+        onClick={() => {
+          dispatch(toggleMenu(false));
+          dispatch(toggleSelectorMenu(false));
+        }}
+      >
         <div className="background-logo">PATHFINDER</div>
         <div className="grid">
           {nodes.map((row, rowIdx) => {

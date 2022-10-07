@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import "./Navbar.css";
+import "../Navbar.css";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
 import DropdownItem from "./DropDownItem.js";
-import { setAlgorithim, setHex, setMaze } from "../redux/navBarReducer";
+import { setAlgorithim, setHex } from "../../redux/navBarReducer";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
-import useVisualizeGraph from "../redux/hooks/useGraph";
-import { toggleMenu } from "../redux/navBarReducer";
+import useVisualizeAlgo from "../../hooks/useVisualizeAlgo";
+import useVisualizeGraph from "../../hooks/useGraph";
+import { toggleMenu } from "../../redux/navBarReducer";
 function DropdownMenu(props) {
   const dispatch = useDispatch();
   const activeMenu = useSelector((state) => state.menu.ActiveSettingsMenu);
   const [menuHeight, setMenuHeight] = useState(null);
   const { visualizePrim, visualizeRecursiveDFSMaze } = useVisualizeAlgo();
-  const { clearBoard } = useVisualizeGraph();
   const dropdownRef = useRef(null);
-
+  const animationActive = useSelector((state) => state.menu.animation);
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
   }, []);
@@ -85,13 +84,6 @@ function DropdownMenu(props) {
             >
               Dijkstra's
             </DropdownItem>
-            <DropdownItem
-              dropDownFunction={setAlgorithim}
-              algo="breadthFirstSearch"
-              goToMenu="main"
-            >
-              Breadth First Search
-            </DropdownItem>
           </div>
         </CSSTransition>
         <CSSTransition
@@ -114,7 +106,7 @@ function DropdownMenu(props) {
               maze="DFS"
               dropDownFunction={() => {
                 dispatch(toggleMenu(false));
-                visualizeRecursiveDFSMaze();
+                !animationActive && visualizeRecursiveDFSMaze();
               }}
             >
               Randomized DFS Maze
@@ -124,7 +116,7 @@ function DropdownMenu(props) {
               maze="prim"
               dropDownFunction={() => {
                 dispatch(toggleMenu(false));
-                visualizePrim();
+                !animationActive && visualizePrim();
               }}
             >
               Randomized Prim Maze

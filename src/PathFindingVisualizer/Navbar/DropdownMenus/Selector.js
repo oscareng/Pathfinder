@@ -1,13 +1,13 @@
 import React from "react";
-import "./Navbar.css";
+import "../Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleMenu,
   toggleSelectorMenu,
   setActiveMenu,
-} from "../redux/navBarReducer";
+} from "../../redux/navBarReducer";
 import DropdownMenu from "./DropdownMenu";
-import NodeIcon from "./NodeIcon";
+import NodeIcon from "../NodeIcon";
 const Selector = (props) => {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.menu.SelectorMenuStatus);

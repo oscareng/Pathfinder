@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setActiveMenu } from "../redux/navBarReducer";
-import { toggleMenu } from "../redux/navBarReducer";
+import { setActiveMenu } from "../../redux/navBarReducer";
+import { toggleMenu } from "../../redux/navBarReducer";
 
 const DropdownItem = (props) => {
   const dispatch = useDispatch();

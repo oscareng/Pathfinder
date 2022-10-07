@@ -1,13 +1,13 @@
-import { dijkstra } from "../../../algorithms/dijkstra";
-import { breadthFirstSearch } from "../../../algorithms/breadthFirstSearch.js";
-import { aStar } from "../../../algorithms/astar.js";
+import { dijkstra } from "../../Algorithms/dijkstra";
+import { breadthFirstSearch } from "../../Algorithms/breadthFirstSearch.js";
+import { aStar } from "../../Algorithms/astar.js";
 import { useDispatch } from "react-redux";
-import { setGrid, setStartOrFinish } from "../gridReducer";
+import { setGrid, setStartOrFinish } from "../redux/gridReducer";
 import { useSelector } from "react-redux";
-import { recursiveBackTrackerMaze } from "../../../algorithms/MazeAlgorithms/recursive-backtracker";
+import { recursiveBackTrackerMaze } from "../../Algorithms/MazeAlgorithms/recursive-backtracker";
 import useVisualizeGraph from "./useGraph";
-import { randomizedPrim } from "../../../algorithms/MazeAlgorithms/randomized-prim";
-import { setAnimationActive } from "../navBarReducer";
+import { randomizedPrim } from "../../Algorithms/MazeAlgorithms/randomized-prim";
+import { setAnimationActive } from "../redux/navBarReducer";
 
 export default function useVisualizeAlgo() {
   const { getNewGridWithAllWallsToggled, clearBoard, createGridHelper } =
@@ -156,7 +156,7 @@ export default function useVisualizeAlgo() {
         : pathKey === "dijkstra"
         ? visualizeDjikstra
         : pathKey === "breadthFirstSearch"
-        ? visualizeBreadthFirstSearch()
+        ? visualizeBreadthFirstSearch
         : "none";
 
     if (pathfindingAlgo !== "none") {

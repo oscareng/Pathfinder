@@ -56,8 +56,6 @@ a {
   background-color: #5fc8d4;
 }
 
-.logo-top {
-}
 .logo {
   display: flex;
   justify-self: flex-start;
@@ -73,6 +71,7 @@ a {
   align-self: center;
   padding: 0 1rem;
   color: #484a4d;
+  cursor: pointer;
 }
 .help-button:hover {
   color: #3f4043;

@@ -70,23 +70,6 @@ export const setAlgorithim = (key) => (dispatch) => {
   }
 };
 
-const _setMaze = (key) => ({
-  type: TOGGLE_MAZE,
-  maze: key,
-});
-
-export const setMaze = (key) => (dispatch) => {
-  if (key === "DFS") {
-    dispatch(_setMaze(key));
-  } else if (key === "prim") {
-    dispatch(_setMaze(key));
-  } else if (key === "none") {
-    dispatch(_setMaze(key));
-  } else {
-    console.log(`setMaze thunk error`);
-  }
-};
-
 const _animationActive = (key) => ({
   type: ANIMATION_ACTIVE,
   animation: key,
@@ -106,8 +89,6 @@ export default function navBarReducer(state = initialState, action) {
       return { ...state, SelectorMenuStatus: action.SelectorMenuStatus };
     case TOGGLE_ALGO:
       return { ...state, algo: action.algo };
-    case TOGGLE_MAZE:
-      return { ...state, maze: action.maze };
     case SET_HEX:
       return { ...state, hex: action.hex };
     case ANIMATION_ACTIVE:

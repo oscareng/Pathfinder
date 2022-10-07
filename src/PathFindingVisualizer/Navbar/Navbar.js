@@ -4,10 +4,10 @@ import Navitem from "./Navitem";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import HelpIcon from "@mui/icons-material/Help";
-import useVisualizeAlgo from "../redux/hooks/visualizeAlgo";
+import useVisualizeAlgo from "../hooks/useVisualizeAlgo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import useVisualizeGraph from "../redux/hooks/useGraph";
-import Selector from "./Selector.js";
+import useVisualizeGraph from "../hooks/useGraph";
+import Selector from "./DropdownMenus/Selector.js";
 import NodeIcon from "./NodeIcon";
 
 const Navbar = (props) => {
@@ -26,7 +26,12 @@ const Navbar = (props) => {
           </div>
         </div>
         Pathfinder
-        <HelpIcon className="help-button" />
+        <HelpIcon
+          onClick={() => {
+            props.onToggleModal(true);
+          }}
+          className="help-button"
+        />
       </div>
 
       <ul className="navbar-nav">

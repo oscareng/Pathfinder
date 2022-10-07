@@ -48,6 +48,17 @@
 .node-weight-icon {
   background: rgb(122, 122, 122);
 }
+.node-visited-icon {
+  background: #5fc8d4;
+}
+
+.node-shortest-path-icon {
+  background: rgb(255, 195, 0);
+}
+
+.node-next {
+  background-color: rgba(17, 120, 217, 0.75);
+}
 .node-visited {
   animation-name: visitedAnimation;
   animation-duration: 1.5s;

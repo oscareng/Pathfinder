@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { setGrid, setStartOrFinish } from "../gridReducer";
-import { setAlgorithim, setMaze } from "../navBarReducer";
+import { setGrid, setStartOrFinish } from "../redux/gridReducer";
+import { setAlgorithim } from "../redux/navBarReducer";
 import { useSelector } from "react-redux";
 export default function useVisualizeGraph() {
   const dispatch = useDispatch();
@@ -82,8 +82,6 @@ export default function useVisualizeGraph() {
     dispatch(setGrid());
     dispatch(setStartOrFinish(9, 10, "start"));
     dispatch(setStartOrFinish(9, 28, "finish"));
-    dispatch(setMaze("none"));
-    dispatch(setAlgorithim("none"));
 
     const start = document.getElementById("node-9-10");
     const finish = document.getElementById("node-9-28");
