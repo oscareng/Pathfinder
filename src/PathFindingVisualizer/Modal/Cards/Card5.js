@@ -10,9 +10,9 @@ const Card5 = (props) => {
         Select an algorithm and press the play button. Once the animation has
         finished, select the refresh button in the navbar to restart.
       </h3>
-
+      <br />
       <p>
-        <img src={algorithmIMG} width="230" height="230" />
+        <img src={algorithmIMG} width="240" height="245" />
       </p>
     </>
   );

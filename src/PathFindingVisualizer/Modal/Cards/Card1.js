@@ -1,5 +1,6 @@
 import React from "react";
 import mazePNG from "../Card-Images/mazePNG.png";
+import LazyLoad from "react-lazy-load";
 const Card1 = (props) => {
   return (
     <>
@@ -14,7 +15,7 @@ const Card1 = (props) => {
         Alternatively, click exit to take a look for yourself!
         <br />
         <br />
-        <img src={mazePNG} width="650"></img>
+        <img src={mazePNG} height="250" width="650"></img>
       </p>{" "}
     </>
   );

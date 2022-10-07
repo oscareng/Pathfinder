@@ -3,9 +3,8 @@ const TOGGLE_ACTIVE_MENU = "TOGGLE_ACTIVE_MENU";
 const TOGGLE_SELECTOR_MENU = "TOGGLE_SELECTOR_MENU";
 const TOGGLE_ALGO = "TOGGLE_ALGO";
 const SET_HEX = "SET_HEX";
-const TOGGLE_MAZE = "TOGGLE_MAZE";
 const ANIMATION_ACTIVE = "ANIMATION_ACTIVE";
-
+const HELP_SET_ALGO = "HELP_SET_ALGO";
 const initialState = {
   ActiveSettingsMenu: "main",
   SelectorMenuStatus: false,
@@ -14,6 +13,7 @@ const initialState = {
   hex: "wall",
   maze: "none",
   animation: false,
+  helpSetAlgo: false,
 };
 
 const _setHex = (hex) => ({
@@ -79,6 +79,14 @@ export const setAnimationActive = (boolean) => (dispatch) => {
   dispatch(_animationActive(boolean));
 };
 
+const helpSetAlgo = (bool) => ({
+  type: HELP_SET_ALGO,
+  helpSetAlgo: false,
+});
+
+export const toggleHelpSetAlgo = (boolean) => (dispatch) => {
+  dispatch(helpSetAlgo(boolean));
+};
 export default function navBarReducer(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_SETTINGS_MENU:
@@ -93,6 +101,8 @@ export default function navBarReducer(state = initialState, action) {
       return { ...state, hex: action.hex };
     case ANIMATION_ACTIVE:
       return { ...state, animation: action.animation };
+    case HELP_SET_ALGO:
+      return { ...state, helpSetAlgo: action.helpSetAlgo };
     default:
       return state;
   }

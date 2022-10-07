@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { recursiveBackTrackerMaze } from "../../Algorithms/MazeAlgorithms/recursive-backtracker";
 import useVisualizeGraph from "./useGraph";
 import { randomizedPrim } from "../../Algorithms/MazeAlgorithms/randomized-prim";
-import { setAnimationActive } from "../redux/navBarReducer";
+import { setAnimationActive, toggleHelpSetAlgo } from "../redux/navBarReducer";
 
 export default function useVisualizeAlgo() {
   const { getNewGridWithAllWallsToggled, clearBoard, createGridHelper } =
@@ -36,22 +36,6 @@ export default function useVisualizeAlgo() {
     }
     return nodesInShortestPathOrder;
   }
-
-  // function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-  //   for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-  //     if (i === visitedNodesInOrder.length) {
-  //       setTimeout(() => {
-  //         animateShortestPath(nodesInShortestPathOrder);
-  //       }, 10 * i);
-  //       return;
-  //     }
-  //     setTimeout(() => {
-  //       const node = visitedNodesInOrder[i];
-  //       document.getElementById(`node-${node.row}-${node.col}`).className =
-  //         "node node-visited";
-  //     }, 25 * i);
-  //   }
-  // }
 
   function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     const timeToAnimate =
@@ -166,7 +150,12 @@ export default function useVisualizeAlgo() {
         dispatch(setAnimationActive(false));
       }, timeToAnimate + 500);
     } else {
-      console.log("set an algorithm to begin!");
+      const errorMsg = document.getElementsByClassName("error-message-hidden");
+      console.log(errorMsg);
+      errorMsg[0].classList.add("visible");
+      setTimeout(() => {
+        errorMsg[0].classList.remove("visible");
+      }, 2000);
     }
   }
 

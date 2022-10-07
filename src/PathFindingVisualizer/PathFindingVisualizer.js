@@ -7,11 +7,16 @@ import Navbar from "./Navbar/Navbar.js";
 import useVisualizeAlgo from "./hooks/useVisualizeAlgo.js";
 import useVisualizeGraph from "./hooks/useGraph.js";
 import Modal from "./Modal/Modal.js";
-import { toggleMenu, toggleSelectorMenu } from "./redux/navBarReducer.js";
+import {
+  toggleMenu,
+  toggleSelectorMenu,
+  toggleHelpSetAlgo,
+} from "./redux/navBarReducer.js";
 const PathFindingVisualizer = () => {
   const dispatch = useDispatch();
   const activeAnimation = useSelector((state) => state.menu.animation);
-  const { sortAlgorithms, nodes, startNode, endNode } = useVisualizeAlgo();
+
+  const { nodes, startNode, endNode } = useVisualizeAlgo();
 
   const {
     getNewGridWithWallToggled,
@@ -80,11 +85,7 @@ const PathFindingVisualizer = () => {
   return nodes !== undefined ? (
     <>
       {modalActive ? <Modal onToggleModal={handleToggleModal} /> : ""}
-      <Navbar
-        className="navbar"
-        sortAlgorithms={sortAlgorithms}
-        onToggleModal={handleToggleModal}
-      ></Navbar>
+      <Navbar className="navbar" onToggleModal={handleToggleModal}></Navbar>
       <div
         className="main"
         onClick={() => {
@@ -93,6 +94,9 @@ const PathFindingVisualizer = () => {
         }}
       >
         <div className="background-logo">PATHFINDER</div>
+        <div className="error-message-hidden">
+          Select a Pathfinding Algorithm!
+        </div>
         <div className="grid">
           {nodes.map((row, rowIdx) => {
             return (
