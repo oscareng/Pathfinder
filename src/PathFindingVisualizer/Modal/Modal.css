@@ -1,0 +1,78 @@
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.modal {
+  background-color: white;
+  height: 500px;
+  width: 1000px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px 30px;
+  max-width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  height: 10%;
+  font-weight: 800;
+}
+p {
+  margin-top: 0.5px;
+  height: 75%;
+}
+h3 {
+  font-weight: 500;
+}
+.modal-btn-container {
+  justify-content: space-between;
+  justify-self: flex-end;
+  display: flex;
+  width: 100%;
+  height: 7%;
+}
+.modal-right-side-btn {
+  margin-left: 15px;
+}
+.modal-btn {
+  background-color: var(--bg-accent);
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  padding: 10px 25px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.node-key-container {
+  display: flex;
+  height: 75%;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-key-container > p {
+  line-height: 40px;
+  margin-top: 5%;
+}
+.github {
+  color: rgba(9, 46, 148, 0.829);
+}
+.mini-text {
+  margin-top: 5px;
+  margin-bottom: 75px;
+  font-size: medium;
+}

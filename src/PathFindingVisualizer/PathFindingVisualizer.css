@@ -28,7 +28,29 @@
   padding-bottom: 10%;
   user-select: none;
 }
-
+.error-message-hidden {
+  display: flex;
+  width: 250px;
+  z-index: 0;
+  position: absolute;
+  align-self: flex-start;
+  justify-content: center;
+  left: 86%;
+  bottom: 85%;
+  color: white;
+  background-color: #cc0000;
+  border-radius: 15px;
+  font-weight: 450;
+  font-size: medium;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1.5s, opacity 1.5s ease;
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1.5s ease;
+}
 .grid::before {
   content: "";
   width: calc(var(--s) / 2 + var(--m));

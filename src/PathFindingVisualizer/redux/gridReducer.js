@@ -16,25 +16,25 @@ const SET_START = "SET_START";
 const SET_FINISH = "SET_FINISH";
 
 function createGridHelper() {
-	const nodes = [];
-	for (let row = 0; row <= 18; row++) {
-		const currentRow = [];
-		for (let col = 0; col <= 38; col++) {
-			const currentNode = {
-				id: `node-${row}-${col}`,
-				col,
-				row,
-				isStart: row === START_NODE_ROW && col === START_NODE_COL,
-				isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-				isWall: false,
-				isVisited: false,
-				distance: Infinity,
-				distanceFromStart: Infinity,
-				estimatedDistanceToEnd: Infinity,
-				isWeighted: false,
-				isVisitedMaze: false,
-				key: uuid(),
-			};
+  const nodes = [];
+  for (let row = 0; row <= 18; row++) {
+    const currentRow = [];
+    for (let col = 0; col <= 38; col++) {
+      const currentNode = {
+        id: `node-${row}-${col}`,
+        col,
+        row,
+        isStart: row === START_NODE_ROW && col === START_NODE_COL,
+        isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+        isWall: false,
+        isVisited: false,
+        distance: Infinity,
+        distanceFromStart: Infinity,
+        estimatedDistanceToEnd: Infinity,
+        isWeighted: false,
+        isVisitedMaze: false,
+        key: uuid(),
+      };
 
 			currentRow.push(currentNode);
 		}

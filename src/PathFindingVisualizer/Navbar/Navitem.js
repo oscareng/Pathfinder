@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Navbar.css";
 import { toggleMenu, toggleSelectorMenu } from "../redux/navBarReducer";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./DropdownMenus/DropdownMenu";
 
 function Navitem(props) {
   const openSettings = useSelector((state) => state.menu.SettingsMenuStatus);
@@ -18,10 +18,8 @@ function Navitem(props) {
           href="#"
           className={`icon-button ${extraClassName} `}
           onClick={() => {
-            if (!animationActive) {
-              dispatch(toggleMenu(!openSettings));
-              dispatch(toggleSelectorMenu(false));
-            }
+            dispatch(toggleMenu(!openSettings));
+            dispatch(toggleSelectorMenu(false));
           }}
         >
           {props.icon}

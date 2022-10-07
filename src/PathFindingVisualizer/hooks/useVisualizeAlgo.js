@@ -1,13 +1,13 @@
-import { dijkstra } from "../../../algorithms/dijkstra";
-import { breadthFirstSearch } from "../../../algorithms/breadthFirstSearch.js";
-import { aStar } from "../../../algorithms/astar.js";
+import { dijkstra } from "../../Algorithms/dijkstra";
+import { breadthFirstSearch } from "../../Algorithms/breadthFirstSearch.js";
+import { aStar } from "../../Algorithms/astar.js";
 import { useDispatch } from "react-redux";
-import { setGrid, setStartOrFinish } from "../gridReducer";
+import { setGrid, setStartOrFinish } from "../redux/gridReducer";
 import { useSelector } from "react-redux";
-import { recursiveBackTrackerMaze } from "../../../algorithms/MazeAlgorithms/recursive-backtracker";
+import { recursiveBackTrackerMaze } from "../../Algorithms/MazeAlgorithms/recursive-backtracker";
 import useVisualizeGraph from "./useGraph";
-import { randomizedPrim } from "../../../algorithms/MazeAlgorithms/randomized-prim";
-import { setAnimationActive } from "../navBarReducer";
+import { randomizedPrim } from "../../Algorithms/MazeAlgorithms/randomized-prim";
+import { setAnimationActive, toggleHelpSetAlgo } from "../redux/navBarReducer";
 
 export default function useVisualizeAlgo() {
   const { getNewGridWithAllWallsToggled, clearBoard, createGridHelper } =
@@ -36,22 +36,6 @@ export default function useVisualizeAlgo() {
     }
     return nodesInShortestPathOrder;
   }
-
-  // function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-  //   for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-  //     if (i === visitedNodesInOrder.length) {
-  //       setTimeout(() => {
-  //         animateShortestPath(nodesInShortestPathOrder);
-  //       }, 10 * i);
-  //       return;
-  //     }
-  //     setTimeout(() => {
-  //       const node = visitedNodesInOrder[i];
-  //       document.getElementById(`node-${node.row}-${node.col}`).className =
-  //         "node node-visited";
-  //     }, 25 * i);
-  //   }
-  // }
 
   function animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     const timeToAnimate =
@@ -156,7 +140,7 @@ export default function useVisualizeAlgo() {
         : pathKey === "dijkstra"
         ? visualizeDjikstra
         : pathKey === "breadthFirstSearch"
-        ? visualizeBreadthFirstSearch()
+        ? visualizeBreadthFirstSearch
         : "none";
 
     if (pathfindingAlgo !== "none") {
@@ -166,7 +150,12 @@ export default function useVisualizeAlgo() {
         dispatch(setAnimationActive(false));
       }, timeToAnimate + 500);
     } else {
-      console.log("set an algorithm to begin!");
+      const errorMsg = document.getElementsByClassName("error-message-hidden");
+      console.log(errorMsg);
+      errorMsg[0].classList.add("visible");
+      setTimeout(() => {
+        errorMsg[0].classList.remove("visible");
+      }, 2000);
     }
   }
 
